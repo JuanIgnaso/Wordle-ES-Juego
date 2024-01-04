@@ -17,16 +17,17 @@ body * {
 
 
 body{
-    background-color:var(--body-color);
+    background-color:var(--color-body);
     color:#fff;
     font-family: 'Poppins', sans-serif;
     margin:0;
     font-weight: 300;
+    height: 100%;
 }
 
 body,html{
     min-height: 100%;
-    max-height: auto;
+    /* max-height: auto; */
 }
 
 strong{
@@ -46,12 +47,7 @@ ol,li{
     list-style: none;
 }
 
-:root{
-    --body-color:#191919;
-    --verde-primario:#04aa6d;
-    --verde-secundario:#193d3d;
-    --warning-color:#cfcf00;
-}
+
 
 .container{
     height: 100%;
@@ -193,5 +189,82 @@ ol,li{
 }
 
 .in_word{
-    background-color: var(--warning-color);
+    background-color: var(--color-warning);
+}
+
+/* FORMULARIO LOGIN REGISTER */
+
+.main-login-register{
+    margin: auto;
+}
+
+
+.main-login-register form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form_group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom:1.75em;
+    align-self: center;
+}
+
+/* not([type="submit"]) */
+
+.form_group input{
+    background-color:var(--color-body);
+    padding: 0.5em;
+    border-radius: 3px;
+    color:white;
+    border: 3px solid #fff;
+    font-family: var(--fuente-pagina);
+    outline: none;
+}
+
+.form_group label{
+    font-size: 1.15em;
+    color:var(--verde-primario);
+    margin-bottom: 0.5em;
+}
+
+input:not([type="submit"]):focus{
+    border: 3px solid var(--verde-secundario);
+}
+
+.form_group *{
+    align-self: start;
+}
+
+.boton{
+    background-color: var(--verde-secundario);
+    font-weight: 700;
+    padding: 0.5em;
+    font-size: 1.25em;
+    letter-spacing: 0.1em;
+    margin: auto;
+    align-self: center;
+    border-radius: 3px;
+    color:#fff;
+    border: unset;
+    font-family: var(--fuente-pagina);
+    outline: none;
+}
+
+.boton:focus,.boton:hover{
+    background-color: var(--verde-primario);
+}
+
+.input_error{
+    color:var(--color-error);
+}
+
+:root{
+    --color-body:#191919;
+    --verde-primario:#04aa6d;
+    --verde-secundario:#193d3d;
+    --color-warning:#cfcf00;
+    --fuente-pagina:'Poppins', sans-serif;
+    --color-error:#dc143c;
 }
