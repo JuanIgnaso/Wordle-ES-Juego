@@ -1,0 +1,13 @@
+{
+    "name": "usuario/wordle-es-juego",
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "juanignaso/php-mcv-core": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "JuanIgnaso",
+            "email": "104755375+JuanIgnaso@users.noreply.github.com"
+        }
+    ]
+}
