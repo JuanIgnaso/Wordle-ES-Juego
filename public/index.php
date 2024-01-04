@@ -35,6 +35,9 @@ $config = [
 //1
 $app = new Application(dirname(__DIR__), $config); //<- dirname(__DIR__) es el directorio base de la aplicación
 
+###DEFINIR RUTAS AQUÍ###
+
+$app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
 
 //2
 //$app->router->get/post('/path','file.php')
