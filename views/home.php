@@ -42,9 +42,9 @@ $this->title = 'Home';
     <section id="acciones">
         <a href="" class="boton-iniciar-juego">Jugar</a>
         <ol id="loginRegister">
-            <li><a href="">Login</a></li>
+            <li><a href="/login">Login</a></li>
             <li>/</li>
-            <li><a href="">Registrarse</a></li>
+            <li><a href="/register">Registrarse</a></li>
         </ol>
     </section>
 </main>

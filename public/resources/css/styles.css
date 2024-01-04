@@ -24,6 +24,11 @@ body{
     font-weight: 300;
 }
 
+body,html{
+    min-height: 100%;
+    max-height: auto;
+}
+
 strong{
     font-weight: 700;
 }
@@ -84,6 +89,7 @@ ol,li{
 #footerWeb{
     border-top:2px solid rgba(168, 168, 168,0.7);
     margin: auto;
+    
     padding: 1em;
 }
 #acciones{
