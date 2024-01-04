@@ -39,7 +39,7 @@ $app = new Application(dirname(__DIR__), $config); //<- dirname(__DIR__) es el d
 
 $app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
 $app->router->get('/register', [app\controllers\AuthController::class, 'register']);
-
+$app->router->get('/login', [app\controllers\AuthController::class, 'login']);
 //2
 //$app->router->get/post('/path','file.php')
 // $app->router->get('/', [app\controllers\SiteController::class, 'home']);

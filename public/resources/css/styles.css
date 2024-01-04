@@ -78,6 +78,25 @@ ol,li{
     font-size: 3em;
 }
 
+#tituloError{
+    text-align: center;
+    font-size: 3em;
+    color:var(--color-error);
+}
+
+#mensajeError{
+    text-align: center;
+}
+
+#errorMain *{
+margin-top:1em;
+margin-bottom:1em;
+}
+
+#mensajeError span{
+    color:var(--color-error);
+}
+
 #tituloWeb i{
     color:#fff;
 }
@@ -202,13 +221,18 @@ ol,li{
 .main-login-register form{
     display: flex;
     flex-direction: column;
+    margin-bottom:3em;
+    align-items: center;
+}
+
+.main-login-register input[type="submit"]{
+    margin-top:2em;
 }
 
 .form_group{
     display: flex;
     flex-direction: column;
     margin-bottom:1.75em;
-    align-self: center;
 }
 
 /* not([type="submit"]) */
@@ -232,6 +256,7 @@ ol,li{
 input:not([type="submit"]):focus{
     border: 3px solid var(--verde-secundario);
 }
+
 
 .form_group *{
     align-self: start;
