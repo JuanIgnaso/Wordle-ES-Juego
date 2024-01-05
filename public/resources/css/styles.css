@@ -65,6 +65,14 @@ ol,li{
     border-radius: 3px;
 }
 
+.alert{
+    color:#fff;
+    text-align: center;
+    font-weight: 700;
+    margin:0.5em 0em;
+    padding: 0.5em;
+}
+
 .boton-iniciar-juego:hover{
     background-color: var(--verde-primario);
 }
@@ -204,7 +212,7 @@ margin-bottom:1em;
 }
 
 .success{
-    background-color: var(--verde-primario);
+    background-color: var(--verde-success);
 }
 
 .in_word{
@@ -259,7 +267,7 @@ input:not([type="submit"]):focus{
 
 
 .form_group *{
-    align-self: start;
+    align-self: center;
 }
 
 .boton{
@@ -279,16 +287,56 @@ input:not([type="submit"]):focus{
 
 .boton:focus,.boton:hover{
     background-color: var(--verde-primario);
+    outline: none;
 }
 
 .input_error{
     color:var(--color-error);
+    width: 100%;
+    text-align: center;
+    
+}
+
+.showUp{
+    position: absolute;
+    /* transform: translate(0%,25%); */
+    margin-left:0.5em;
+    background-color:unset;
+    border:3px solid var(--verde-secundario);
+    border-radius: 4px;
+    padding:0.5em;
+    font-size: 1em;
+    color:white;
+}
+
+.showUp:hover,.showUp:focus{
+    border: 3px solid var(--verde-primario);
+    outline: none;
+}
+
+#bienvenidoMensaje{
+    margin-top:0.75em;
+    font-weight: 700;
+    font-size: 1.5em;
+    color:var(--verde-primario);
+}
+
+#bienvenidoMensaje strong{
+color:var(--color-error);
+}
+
+#username{
+    color:var(--verde-primario);
+    font-style: bold;
+    padding: 0.6em;
+    font-size: 1.15em;
 }
 
 :root{
     --color-body:#191919;
     --verde-primario:#04aa6d;
     --verde-secundario:#193d3d;
+    --verde-success:#00cf00;
     --color-warning:#cfcf00;
     --fuente-pagina:'Poppins', sans-serif;
     --color-error:#dc143c;

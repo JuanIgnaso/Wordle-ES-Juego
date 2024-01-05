@@ -1,4 +1,6 @@
 <?php
+use juanignaso\phpmvc\Application;
+
 /**
  * @var $this \juanignaso\phpmvc\View
  */
@@ -41,10 +43,22 @@ $this->title = 'Home';
     </section>
     <section id="acciones">
         <a href="" class="boton-iniciar-juego">Jugar</a>
-        <ol id="loginRegister">
-            <li><a href="/login">Login</a></li>
-            <li>/</li>
-            <li><a href="/register">Registrarse</a></li>
-        </ol>
+        <?php
+        if (Application::isGuest()) {
+            ?>
+            <ol id="loginRegister">
+                <li><a href="/login">Login</a></li>
+                <li>/</li>
+                <li><a href="/register">Registrarse</a></li>
+            </ol>
+            <?php
+        } else {
+            ?>
+            <p id="bienvenidoMensaje">Bienvenido de nuevo <strong>
+                    <?php echo Application::$app->user->getUserName(); ?>
+                </strong></p>
+            <?php
+        }
+        ?>
     </section>
 </main>

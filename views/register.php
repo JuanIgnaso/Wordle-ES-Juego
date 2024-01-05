@@ -1,4 +1,6 @@
 <?php
+use juanignaso\phpmvc\form\PasswordField;
+
 /** @var mixed $this \juanignaso\phpmvc\View  */
 
 $this->title = 'Registrar Usuario';
@@ -11,8 +13,10 @@ $this->title = 'Registrar Usuario';
     <div class="separator"></div>
     <?php echo $form->field($model, 'nombre'); ?>
     <?php echo $form->field($model, 'email'); ?>
-    <?php echo $form->field($model, 'password')->passwordField(); ?>
-    <?php echo $form->field($model, 'passwordConfirm')->passwordField(); ?>
+    <?php echo new PasswordField($model, 'password'); ?>
+    <?php echo new PasswordField($model, 'passwordConfirm'); ?>
     <input type="submit" value="Registrarse" class="boton">
     <?php juanignaso\phpmvc\form\Form::end(); ?>
+    <a href="/" style="color:white; margin-top:0.5em;">Volver a Inicio</a>
 </main>
+<script src="resources/js/hiddeShowPass.js"></script>

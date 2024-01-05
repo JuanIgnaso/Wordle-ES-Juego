@@ -1,5 +1,6 @@
 <?php
 use app\models\User;
+use app\models\Usuario;
 
 #la constante __DIR__ se refiere al directorio actual
 #Con esto deberíamos poder usar las clases con su correcto
@@ -16,7 +17,7 @@ use juanignaso\phpmvc\Application;
 Array de configuraciones
 */
 $config = [
-    'userClass' => User::class,
+    'userClass' => Usuario::class,
     //Configuración de la base de datos
     'db' => [
         'dsn' => $_ENV['DB_DSN'], //<- variables de entorno se llaman así.
@@ -39,7 +40,10 @@ $app = new Application(dirname(__DIR__), $config); //<- dirname(__DIR__) es el d
 
 $app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
 $app->router->get('/register', [app\controllers\AuthController::class, 'register']);
+$app->router->post('/register', [app\controllers\AuthController::class, 'register']);
 $app->router->get('/login', [app\controllers\AuthController::class, 'login']);
+$app->router->post('/login', [app\controllers\AuthController::class, 'login']);
+$app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
 //2
 //$app->router->get/post('/path','file.php')
 // $app->router->get('/', [app\controllers\SiteController::class, 'home']);
