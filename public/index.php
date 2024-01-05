@@ -44,20 +44,8 @@ $app->router->post('/register', [app\controllers\AuthController::class, 'registe
 $app->router->get('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
-//2
-//$app->router->get/post('/path','file.php')
-// $app->router->get('/', [app\controllers\SiteController::class, 'home']);
-// $app->router->get('/contactos', [app\controllers\SiteController::class, 'contact']);
-// $app->router->post('/contactos', [app\controllers\SiteController::class, 'contact']);
-// $app->router->get('/login', [app\controllers\AuthController::class, 'login']);
-// $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
-// $app->router->get('/register', [app\controllers\AuthController::class, 'register']);
-// $app->router->post('/register', [app\controllers\AuthController::class, 'register']);
-// $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
-// $app->router->get('/profile', [app\controllers\AuthController::class, 'profile']);
+$app->router->get('/menuPalabras', [app\controllers\ConfigController::class, 'menuPalabras']);
+$app->router->get('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
 
-#$app->router->get('/path',[SiteController::class,'funcion']);
-
-//3
 $app->run(); #Manejar todo. <- cuando esto se ejecuta se decide que función ejecutar.
 ?>

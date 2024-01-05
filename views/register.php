@@ -5,7 +5,7 @@ use juanignaso\phpmvc\form\PasswordField;
 
 $this->title = 'Registrar Usuario';
 ?>
-<h1 id="tituloWeb">Registrar nuevo usuario</h1>
+<h1 class="tituloPagina">Registrar nuevo usuario <i class="fa-regular fa-address-card"></i></h1>
 
 <main class="main-login-register">
 

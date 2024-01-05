@@ -5,7 +5,7 @@ use juanignaso\phpmvc\form\PasswordField;
 
 $this->title = 'Iniciar Sesión';
 ?>
-<h1 id="tituloWeb">Iniciar Sesión</h1>
+<h1 class="tituloPagina">Iniciar Sesión <i class="fa-solid fa-right-to-bracket"></i></h1>
 
 <main class="main-login-register">
 

@@ -81,7 +81,7 @@ ol,li{
     width: 90%;
 }
 
-#tituloWeb{
+.tituloPagina{
     text-align: center;
     font-size: 3em;
 }
@@ -105,7 +105,7 @@ margin-bottom:1em;
     color:var(--color-error);
 }
 
-#tituloWeb i{
+.tituloPagina i{
     color:#fff;
 }
 

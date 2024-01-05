@@ -8,7 +8,7 @@ use juanignaso\phpmvc\Application;
 $this->title = 'Home';
 ?>
 <header>
-    <h1 id="tituloWeb">JUEGO WORDLE <i class="fa-regular fa-keyboard"></i></h1>
+    <h1 class="tituloPagina">JUEGO WORDLE <i class="fa-regular fa-keyboard"></i></h1>
 </header>
 <main>
     <section id="desc-juego">
