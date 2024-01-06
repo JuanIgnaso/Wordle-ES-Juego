@@ -46,6 +46,7 @@ $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
 $app->router->get('/menuPalabras', [app\controllers\ConfigController::class, 'menuPalabras']);
 $app->router->get('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
+$app->router->post('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
 
 $app->run(); #Manejar todo. <- cuando esto se ejecuta se decide que función ejecutar.
 ?>
