@@ -23,6 +23,11 @@ class Categoria extends DBmodel
         return parent::delete();
     }
 
+    public function getAll()
+    {
+        return parent::getAll();
+    }
+
     public function rules(): array
     {
         return [

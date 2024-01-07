@@ -25,6 +25,7 @@ class ConfigController extends Controller
     public function menuCategorias(Request $request)
     {
         $model = new Categoria();
+        $categoryList = $model->getAll();
 
         if ($request->isPost()) {
 
@@ -38,6 +39,7 @@ class ConfigController extends Controller
 
         return $this->render('menuCategorias', [
             'model' => $model,
+            'categorias' => $categoryList,
         ]);
     }
 
@@ -47,13 +49,18 @@ class ConfigController extends Controller
 
         if ($request->isPost()) {
             $model->loadData($request->getBody());
+            if ($model->nombre_categoria == 'Predeterminado') {
+                Application::$app->response->setStatusCode(400);
+                Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no se Puede borrar.");
+                exit;
+            }
+
             if ($model->delete()) {
-                http_response_code(200);
+                Application::$app->response->setStatusCode(200);
                 Application::$app->session->setFlash('success', "Categoría $model->nombre_categoria ha sido eliminada");
                 exit;
 
             } else {
-                Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no existe.");
                 http_response_code(400);
                 Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no existe.");
                 exit;

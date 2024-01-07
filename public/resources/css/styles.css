@@ -369,10 +369,59 @@ color:var(--color-error);
     font-size: 1.15em;
 }
 
+#registrosContainer{
+    gap:2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#registrosContainer .separator{
+    margin:auto;
+}
+
+  table, th, td {
+  border-collapse: collapse;
+} 
+
+caption{
+    color:var(--verde-primario);
+    font-weight: 700;
+    font-size: 1.75em;
+}
+
+.actionBorrar{
+    color:var(--color-error);
+    font-size: 1.35em;
+}
+
+.action{
+    text-align: center;
+}
+
+/* .dataTable{
+    margin-bottom:2em;
+} */
+
+tr:nth-child(odd) {background-color: var(--verde-secundario-50)}
+
+th{
+    border-bottom: 3px solid var(--verde-secundario);
+    color:var(--verde-primario);
+    font-size: 1.15em;
+    background: var(--color-body) !important;
+}
+
+th,td{
+    padding:0.5em;
+}
+
+
 :root{
     --color-body:#191919;
     --verde-primario:#04aa6d;
     --verde-secundario:#193d3d;
+    --verde-secundario-50:rgba(25, 61, 61,0.5);
     --verde-success:#00cf00;
     --color-warning:#cfcf00;
     --fuente-pagina:'Poppins', sans-serif;
