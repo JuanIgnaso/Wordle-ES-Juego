@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\CategoriaModel;
+use app\models\Categoria;
 use juanignaso\phpmvc\Application;
 use juanignaso\phpmvc\Controller;
 use juanignaso\phpmvc\middlewares\AuthMiddleware;
@@ -24,11 +24,13 @@ class ConfigController extends Controller
 
     public function menuCategorias(Request $request)
     {
-        $model = new CategoriaModel();
+        $model = new Categoria();
 
         if ($request->isPost()) {
+
             $model->loadData($request->getBody());
-            if ($model->validate()) {
+
+            if ($model->validate() && $model->save()) {
                 Application::$app->session->setFlash('success', "Nueva Categoría $model->nombre_categoria ha sido creada!");
                 Application::$app->response->redirect('/menuCategorias');
             }
@@ -37,5 +39,27 @@ class ConfigController extends Controller
         return $this->render('menuCategorias', [
             'model' => $model,
         ]);
+    }
+
+    public function deleteCategoria(Request $request)
+    {
+        $model = new Categoria();
+
+        if ($request->isPost()) {
+            $model->loadData($request->getBody());
+            if ($model->delete()) {
+                http_response_code(200);
+                Application::$app->session->setFlash('success', "Categoría $model->nombre_categoria ha sido eliminada");
+                exit;
+
+            } else {
+                Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no existe.");
+                http_response_code(400);
+                Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no existe.");
+                exit;
+            }
+        }
+        Application::$app->response->redirect('/menuCategorias');
+
     }
 }

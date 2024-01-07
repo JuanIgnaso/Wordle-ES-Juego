@@ -18,7 +18,7 @@ $this->title = 'Home';
             <li>
                 <p>El objetivo del juego es acertar la palabra seleccionada por el juego en un número máximo de
                     <strong>6
-                        intentos</strong>
+                        intentos </strong>
                 </p>
             </li>
             <li>

@@ -303,6 +303,23 @@ padding:0.5em;
 border-radius: 4px;
 border:unset;
 color:white;
+background-color:unset;
+}
+
+.botonDelete{
+    border: 3px solid var(--color-rojo-secundario);
+}
+
+.botonDelete:hover,.botonDelete:focus{
+    border: 3px solid var(--color-error);
+}
+
+.botonAdd{
+    border: 3px solid var(--verde-secundario);
+}
+
+.botonAdd:hover,.botonAdd:focus{
+    border: 3px solid var(--verde-primario);
 }
 
 .boton:focus,.boton:hover{
@@ -360,9 +377,13 @@ color:var(--color-error);
     --color-warning:#cfcf00;
     --fuente-pagina:'Poppins', sans-serif;
     --color-error:#dc143c;
+    --color-rojo-secundario:#8b0000;
 }
 
 .actions{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items:center;
+    margin-bottom: 2em;
 }

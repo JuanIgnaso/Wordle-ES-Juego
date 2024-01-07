@@ -47,6 +47,9 @@ $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
 $app->router->get('/menuPalabras', [app\controllers\ConfigController::class, 'menuPalabras']);
 $app->router->get('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
 $app->router->post('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
+$app->router->post('/borrarCategoria', [app\controllers\ConfigController::class, 'deleteCategoria']);
+$app->router->get('/borrarCategoria', [app\controllers\ConfigController::class, 'deleteCategoria']);
+
 
 $app->run(); #Manejar todo. <- cuando esto se ejecuta se decide que función ejecutar.
 ?>

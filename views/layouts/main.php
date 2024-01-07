@@ -11,6 +11,10 @@
     <!-- Iconos -->
     <link rel="stylesheet" href="./resources/icons/fontawesome/css/all.css">
     <!-- AQUÍ TÍTULO DE LA PÁGINA -->
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <title>
         <?php echo $this->title;
         ?>
@@ -36,6 +40,18 @@
             <div class="alert success">
                 <span>
                     <?php echo Application::$app->session->getFlash('success') ?>
+                </span>
+            </div>
+            <?php
+        }
+        ?>
+
+        <?php
+        if (Application::$app->session->getFlash('error')) {
+            ?>
+            <div class="alert error">
+                <span>
+                    <?php echo Application::$app->session->getFlash('error') ?>
                 </span>
             </div>
             <?php
