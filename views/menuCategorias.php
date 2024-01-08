@@ -21,7 +21,7 @@ $this->title = 'Menú Categorías';
 
 <?php Form::end(); ?>
 
-<section id="registrosContainer">
+<section class="registrosContainer">
     <div class="separator"></div>
 
     <table class=" dataTable">
@@ -43,7 +43,7 @@ $this->title = 'Menú Categorías';
                         <?php echo $categoria['nombre_categoria']; ?>
                     </td>
                     <td class="action"><i class="fa-regular fa-square-minus actionBorrar"
-                            onclick="borrarCat( '<?php echo $categoria['nombre_categoria']; ?>')"></i></td>
+                            onclick="borrarCat( '<?php echo $categoria['nombre_categoria']; ?>')" aria-label="Borrar"></i></td>
                 </tr>
                 <?php
             }

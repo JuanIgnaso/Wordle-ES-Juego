@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Categoria;
+use app\models\Palabra;
 use juanignaso\phpmvc\Application;
 use juanignaso\phpmvc\Controller;
 use juanignaso\phpmvc\middlewares\AuthMiddleware;
@@ -17,8 +18,18 @@ class ConfigController extends Controller
     }
     public function menuPalabras(Request $request)
     {
+
+        $model = new Palabra();
+        $categorias = new Categoria();
+
+        $palabras = $model->getAll();
+        $categoriasList = $categorias->getAll();
+
+        #Enviamos el modelo y la lista de categorías/palabras a la vista
         return $this->render('menuPalabras', [
-            'categorias' => 'boniato',
+            'model' => $model,
+            'categorias' => $categoriasList,
+            'palabras' => $palabras,
         ]);
     }
 

@@ -369,7 +369,7 @@ color:var(--color-error);
     font-size: 1.15em;
 }
 
-#registrosContainer{
+.registrosContainer{
     gap:2em;
     display: flex;
     flex-direction: column;
