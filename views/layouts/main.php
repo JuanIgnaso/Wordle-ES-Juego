@@ -38,6 +38,7 @@
         if (Application::$app->session->getFlash('success')) {
             ?>
             <div class="alert success">
+                <span onclick="this.parentNode.style.display = 'none'" id="close">&times; </span>
                 <span>
                     <?php echo Application::$app->session->getFlash('success') ?>
                 </span>

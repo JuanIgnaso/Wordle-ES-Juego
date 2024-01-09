@@ -71,6 +71,20 @@ ol,li{
     font-weight: 700;
     margin:0.5em 0em;
     padding: 0.5em;
+    position:fixed;
+    width: 90%;
+    z-index: 20;
+    display: flex;
+    gap:0.5em;
+}
+
+#close{
+    font-size: 1.15em;
+}
+
+#close:hover{
+    cursor:pointer;
+    color:#000;
 }
 
 .boton-iniciar-juego:hover{
@@ -81,13 +95,18 @@ ol,li{
     width: 90%;
 }
 
-.tituloPagina{
+.tituloPagina,.subtituloPagina{
     text-align: center;
-    font-size: 3em;
     position:relative;
 }
 
+.tituloPagina{
+    font-size: 3em;
+}
 
+.subtituloPagina{
+    font-size: 2.25em;
+}
 
 #tituloError{
     text-align: center;
@@ -217,8 +236,8 @@ margin-bottom:1em;
     gap:1em;
 }
 
-.desc-element strong{
-    color:var(--verde-primario);
+strong{
+    color:var(--color-error);
 }
 
 .success{
@@ -365,12 +384,30 @@ background-color:unset;
 color:var(--color-error);
 }
 
+#anotation{
+    font-size: 0.85em;
+    font-style: italic;
+}
+
+#categoriaSeleccion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2em;
+    margin-bottom:2em;
+}
+
+#mainGame{
+    display: none;
+}
+
 #username{
     color:var(--verde-primario);
     font-style: bold;
     padding: 0.6em;
     font-size: 1.15em;
 }
+
 
 .confMenu{
     display: flex;

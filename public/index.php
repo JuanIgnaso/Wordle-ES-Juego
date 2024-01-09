@@ -26,24 +26,24 @@ $config = [
     ]
 ];
 
-/*
- Pasos a seguir para iniciar la app
- 1-crear instancia
- 2-definir las rutas
- 3-iniciar con un $app->run() 
-*/
-
-//1
 $app = new Application(dirname(__DIR__), $config); //<- dirname(__DIR__) es el directorio base de la aplicación
 
 ###DEFINIR RUTAS AQUÍ###
 
 $app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
+
+#REGISTRARSE
 $app->router->get('/register', [app\controllers\AuthController::class, 'register']);
 $app->router->post('/register', [app\controllers\AuthController::class, 'register']);
+
+#LOGUEARSE
 $app->router->get('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
+
+#LOGOUT
 $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
+
+#CONFIGURACIÓN DE CATEGORÍAS Y PALABRAS
 $app->router->get('/menuPalabras', [app\controllers\ConfigController::class, 'menuPalabras']);
 $app->router->post('/menuPalabras', [app\controllers\ConfigController::class, 'menuPalabras']);
 $app->router->get('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
@@ -52,6 +52,9 @@ $app->router->post('/borrarCategoria', [app\controllers\ConfigController::class,
 $app->router->get('/borrarCategoria', [app\controllers\ConfigController::class, 'borrarCategoria']);
 $app->router->get('/borrarPalabra', [app\controllers\ConfigController::class, 'borrarPalabra']);
 $app->router->post('/borrarPalabra', [app\controllers\ConfigController::class, 'borrarPalabra']);
+
+#JUEGO
+$app->router->get('/juego', [app\controllers\GameController::class, 'juego']);
 
 $app->run(); #Manejar todo. <- cuando esto se ejecuta se decide que función ejecutar.
 ?>

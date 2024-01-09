@@ -42,7 +42,7 @@ $this->title = 'Home';
         <div class="separator"></div>
     </section>
     <section id="acciones">
-        <a href="" class="boton-iniciar-juego">Jugar</a>
+        <a href="/juego" class="boton-iniciar-juego">Jugar</a>
         <?php
         if (Application::isGuest()) {
             ?>
