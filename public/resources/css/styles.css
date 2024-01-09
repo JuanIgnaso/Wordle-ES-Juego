@@ -244,6 +244,10 @@ strong{
     background-color: var(--verde-success);
 }
 
+.inWord{
+    background-color: var(--color-warning);
+}
+
 .error{
     background-color: var(--color-error);
 }
@@ -390,7 +394,8 @@ color:var(--color-error);
 }
 
 #categoriaSeleccion{
-    display: flex;
+    display:none; /*temporalmente mientras se hace pantalla de juego*/
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
     gap:2em;
@@ -398,7 +403,29 @@ color:var(--color-error);
 }
 
 #mainGame{
-    display: none;
+    /* display: none; temporalmente para trabajar en apariencia*/
+}
+
+#board{
+border:2px solid rgba(255,255,255,0.5);
+display: grid;
+justify-content: center;
+align-items: center;
+grid-template-columns: repeat(15,5.5%);
+gap:0.5em;
+padding:0.5em;
+}
+
+.letter{
+    justify-content: center;
+    aspect-ratio: 1/1;
+    border:3px solid white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    font-size: clamp(1rem, 10vw, 2rem);
+    font-weight: 700;
+    box-shadow: 0px 0px 3px 3px rgba(255,255,255,0.5);
 }
 
 #username{

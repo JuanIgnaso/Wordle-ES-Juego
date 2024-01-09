@@ -37,10 +37,113 @@ $this->title = 'Partida';
     </section>
     <section id="mainGame">
         <h2 class="subtituloPagina">Juego</h2>
+        <div id="board">
+            <div class="letter success">A</div>
+            <div class="letter">A</div>
+            <div class="letter inWord">B</div>
+            <div class="letter">C</div>
+            <div class="letter">D</div>
+            <div class="letter">E</div>
+            <div class="letter">F</div>
+            <div class="letter">G</div>
+            <div class="letter">H</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+
+            <div class="letter success">A</div>
+            <div class="letter">A</div>
+            <div class="letter inWord">B</div>
+            <div class="letter">C</div>
+            <div class="letter">D</div>
+            <div class="letter">E</div>
+            <div class="letter">F</div>
+            <div class="letter">G</div>
+            <div class="letter">H</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+
+            <div class="letter success">A</div>
+            <div class="letter">A</div>
+            <div class="letter inWord">B</div>
+            <div class="letter">C</div>
+            <div class="letter">D</div>
+            <div class="letter">E</div>
+            <div class="letter">F</div>
+            <div class="letter">G</div>
+            <div class="letter">H</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+
+            <div class="letter success">A</div>
+            <div class="letter">A</div>
+            <div class="letter inWord">B</div>
+            <div class="letter">C</div>
+            <div class="letter">D</div>
+            <div class="letter">E</div>
+            <div class="letter">F</div>
+            <div class="letter">G</div>
+            <div class="letter">H</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+
+            <div class="letter success">A</div>
+            <div class="letter">A</div>
+            <div class="letter inWord">B</div>
+            <div class="letter">C</div>
+            <div class="letter">D</div>
+            <div class="letter">E</div>
+            <div class="letter">F</div>
+            <div class="letter">G</div>
+            <div class="letter">H</div>
+            <div class="letter">A</div>
+            <div class="letter success">W</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+            <div class="letter">A</div>
+        </div>
     </section>
     <script>
         //Empezar juego
         let seleccionCategoria = document.querySelector('#categoriaSeleccion');
         let pantallaJuego = document.querySelector('#mainGame');
+        let start = document.querySelector('#empezar');
+
+        start.addEventListener('click', function () {
+            seleccionCategoria.style.display = 'none';
+            pantallaJuego.style.display = 'block';
+        })
     </script>
 </main>
