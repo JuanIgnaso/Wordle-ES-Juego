@@ -14,9 +14,21 @@ class Palabra extends DBmodel
     public function rules(): array
     {
         return [
-            'palabra' => [self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class]],
+            'palabra' => [self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class], [self::RULE_REGEX, 'regex' => '/^[a-zA-Z]{3,15}$/', 'text' => 'la palabra solo debe de contener letras entre 3 y 15 caracteres']],
             'categoria' => [self::RULE_REQUIRED],
         ];
+    }
+
+    public function save()
+    {
+        $this->palabra = strtolower($this->palabra);
+        return parent::save();
+    }
+
+    public function delete(): bool
+    {
+        $this->palabra = strtolower($this->palabra);
+        return parent::delete();
     }
 
     public function tableName(): string
@@ -27,7 +39,7 @@ class Palabra extends DBmodel
     public function getAll()
     {
         $tableName = $this->tableName();
-        return self::query("SELECT palabras.id,palabras.palabra,categoria.nombre_categoria  FROM $tableName LEFT JOIN categoria ON palabras.categoria = categoria.id")->fetchAll(\PDO::FETCH_ASSOC);
+        return self::query("SELECT palabras.id,palabras.palabra,palabras.categoria,categoria.nombre_categoria  FROM $tableName LEFT JOIN categoria ON palabras.categoria = categoria.id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function labels(): array

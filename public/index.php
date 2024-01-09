@@ -48,9 +48,10 @@ $app->router->get('/menuPalabras', [app\controllers\ConfigController::class, 'me
 $app->router->post('/menuPalabras', [app\controllers\ConfigController::class, 'menuPalabras']);
 $app->router->get('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
 $app->router->post('/menuCategorias', [app\controllers\ConfigController::class, 'menuCategorias']);
-$app->router->post('/borrarCategoria', [app\controllers\ConfigController::class, 'deleteCategoria']);
-$app->router->get('/borrarCategoria', [app\controllers\ConfigController::class, 'deleteCategoria']);
-
+$app->router->post('/borrarCategoria', [app\controllers\ConfigController::class, 'borrarCategoria']);
+$app->router->get('/borrarCategoria', [app\controllers\ConfigController::class, 'borrarCategoria']);
+$app->router->get('/borrarPalabra', [app\controllers\ConfigController::class, 'borrarPalabra']);
+$app->router->post('/borrarPalabra', [app\controllers\ConfigController::class, 'borrarPalabra']);
 
 $app->run(); #Manejar todo. <- cuando esto se ejecuta se decide que función ejecutar.
 ?>

@@ -47,7 +47,8 @@ $this->title = 'Menú Categorías';
                         <?php echo $categoria['nombre_categoria']; ?>
                     </td>
                     <td class="action"><i class="fa-regular fa-square-minus actionBorrar"
-                            onclick="borrarCat( '<?php echo $categoria['nombre_categoria']; ?>')" aria-label="Borrar"></i></td>
+                            onclick="borrarElemento( '<?php echo $categoria['nombre_categoria']; ?>','/borrarCategoria')"
+                            aria-label="Borrar"></i></td>
                 </tr>
                 <?php
             }
@@ -59,19 +60,19 @@ $this->title = 'Menú Categorías';
         /*
         Función para borrar la categoría especificada por el input text
         */
-        function borrarCat(data) {
+        function borrarElemento(data, url) {
+
             $.ajax({
-                url: '/borrarCategoria',
+                url: url,
                 type: 'POST',
                 data: {
                     nombre_categoria: data
                 },
                 success: function (response) {
                     location.reload();
-                    console.log('Categoría borrada');
+                    console.log('Elemento borrado');
                 }, error: function (error) {
                     location.reload();
-                    document.querySelector('#nombre_categoria').value = data;
                     console.log('error');
                 },
             });

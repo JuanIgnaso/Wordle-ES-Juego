@@ -64,7 +64,7 @@ class ConfigController extends Controller
         ]);
     }
 
-    public function deleteCategoria(Request $request)
+    public function borrarCategoria(Request $request)
     {
         $model = new Categoria();
 
@@ -90,4 +90,27 @@ class ConfigController extends Controller
         Application::$app->response->redirect('/menuCategorias');
 
     }
+
+    public function borrarPalabra(Request $request)
+    {
+        $model = new Palabra();
+        if ($request->isPost()) {
+            $model->loadData($request->getBody());
+            if ($model->delete()) {
+                Application::$app->response->setStatusCode(200);
+                Application::$app->session->setFlash('success', "La palabra $model->palabra ha sido borrada.");
+                exit;
+            } else {
+                Application::$app->response->setStatusCode(400);
+                echo $model->palabra;
+                echo $model->categoria;
+                Application::$app->session->setFlash('error', "Error, la palabra $model->palabra no existe!");
+                exit;
+            }
+        }
+        Application::$app->response->redirect('/menuCategorias');
+
+    }
+
+
 }
