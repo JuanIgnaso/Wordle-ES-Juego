@@ -27,7 +27,7 @@
         ?>
         <span id="username">
             <?php echo Application::$app->user->getUserName(); ?> <a href="/logout"><i
-                    class="fa-solid fa-right-from-bracket"></i></a>
+                    class="fa-solid fa-right-from-bracket"></i></a> / <a href="/">Inicio</a>
         </span>
         <?php
     }

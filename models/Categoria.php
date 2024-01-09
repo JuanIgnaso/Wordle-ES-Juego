@@ -31,7 +31,7 @@ class Categoria extends DBmodel
     public function rules(): array
     {
         return [
-            'nombre_categoria' => [self::RULE_WHITE_SPACE, self::RULE_REQUIRED, [self::RULE_REGEX, 'regex' => '/^[a-zA-Z]+( +[a-zA-Z]+)*$/', 'text' => 'solo se permiten letras y espacios, entre 3 y 60 caracteres de largo.']]
+            'nombre_categoria' => [[self::RULE_UNIQUE, 'class' => self::class], self::RULE_WHITE_SPACE, self::RULE_REQUIRED, [self::RULE_REGEX, 'regex' => '/^[a-zA-Z]+( +[a-zA-Z]+)*$/', 'text' => 'solo se permiten letras y espacios, entre 3 y 60 caracteres de largo.']]
         ];
     }
 
@@ -55,5 +55,13 @@ class Categoria extends DBmodel
     public function primaryKey(): string
     {
         return 'id';
+    }
+
+    public function getCategoryName($id): string
+    {
+        $statement = self::prepare("SELECT nombre_categoria FROM categoria WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        return $statement->fetch(\PDO::FETCH_ASSOC)['nombre_categoria'];
     }
 }

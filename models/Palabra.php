@@ -7,15 +7,15 @@ use juanignaso\phpmvc\Model;
 
 class Palabra extends DBmodel
 {
-    public string $id;
+    public string $id = '';
     public string $palabra = '';
-    public int $categoria;
+    public string $categoria;
 
     public function rules(): array
     {
         return [
-            'palabra' => [self::RULE_REQUIRED, self::RULE_UNIQUE],
-
+            'palabra' => [self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class]],
+            'categoria' => [self::RULE_REQUIRED],
         ];
     }
 

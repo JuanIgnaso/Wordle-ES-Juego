@@ -8,8 +8,12 @@ use juanignaso\phpmvc\form\Form;
 
 $this->title = 'Menú Categorías';
 ?>
-
-<h1 class="tituloPagina">Menú de Categorías <i class="fa-solid fa-layer-group"></i></h1>
+<ol class="confMenu">
+    <li><a href="/menuPalabras">Palabras</a></li>
+    <li>/</li>
+    <li><span>Categorías</span></li>
+</ol>
+<h1 class="tituloPagina">Menú de Categorías <i class="fa-solid fa-layer-group"></i> </h1>
 <?php $form = Form::begin('', 'post'); ?>
 <div class="actions">
     <?php echo $form->field($model, 'nombre_categoria'); ?>
