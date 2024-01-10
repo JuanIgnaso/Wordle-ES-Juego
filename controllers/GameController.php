@@ -12,6 +12,8 @@ class GameController extends Controller
     {
         $categorias = new Categoria();
 
+        $this->setLayout('mainGame');
+
         return $this->render('juego', [
             'categorias' => $categorias->getAll(),
         ]);

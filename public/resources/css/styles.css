@@ -54,6 +54,12 @@ ol,li{
     margin: auto;
 }
 
+.gameContainer{
+    width: 99%;
+    height: 100%;
+    margin: auto;
+}
+
 .boton-iniciar-juego{
     background-color: var(--verde-secundario);
     font-weight: 700;
@@ -406,27 +412,142 @@ color:var(--color-error);
     /* display: none; temporalmente para trabajar en apariencia*/
 }
 
+#mainGame header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom:0.5em;
+    position:relative;
+}
+
+#mainGame header h2{
+font-size: 1.6em;
+}
+
+
+/*
+gameConf <- boton
+confContent <- contenido del menu
+*/
+
+.dropdown{
+    position:relative;
+    display: inline-block;
+}
+
+.dropdown:hover .confContent{display: block;}
+.dropdown:focus .confContent{display: block;}
+
+
+.gameConf{
+    font-size: 1.75em;
+    border:unset;
+    color:gray;
+    background-color: var(--color-body);
+    cursor:pointer;
+    outline: none;
+    position: relative;
+}
+
+
+.gameConf:focus,.gameConf:hover{
+    color:white;
+}
+
+
+.confContent{
+  display: none; 
+  position: absolute;
+  padding: 0.45em;
+  border: 3px solid var(--verde-secundario);
+  border-radius: 4px;
+  right: 0;
+  top: 100%;
+  background-color: var(--color-body-75);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.confContent a{
+    color:gray;
+    outline: none;
+}
+
+.confContent a:hover,.confContent a:focus{
+    color:white;
+    font-weight: bold;
+}
+
+.confContent ol li:first-child{
+    color:var(--color-error);
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.show{
+    display: block;
+}
+
 #board{
-border:2px solid rgba(255,255,255,0.5);
-display: grid;
-justify-content: center;
-align-items: center;
-grid-template-columns: repeat(15,5.5%);
-gap:0.5em;
-padding:0.5em;
+/* border:2px solid rgba(255,255,255,0.5); */
+padding:0.75em;
+min-height: 650px;
+}
+
+.word{
+    display: grid;
+    justify-content: center;
+    align-items: start;
+    grid-template-columns: repeat(15,5.25%);
+    gap:0.5em;
+    padding:0.25em;
 }
 
 .letter{
     justify-content: center;
     aspect-ratio: 1/1;
-    border:3px solid white;
     border-radius: 3px;
     display: flex;
     align-items: center;
-    font-size: clamp(1rem, 10vw, 2rem);
+    font-size: clamp(0.1rem, 4vw, 2rem);
     font-weight: 700;
+}
+
+.enabled{
+    border:3px solid white;
     box-shadow: 0px 0px 3px 3px rgba(255,255,255,0.5);
 }
+
+.dissabled{
+    border:3px solid rgba(128, 128, 128,0.25);
+}
+
+#userInput{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    color:var(--verde-primario);
+    font-weight: 700;
+    gap:0.5em;
+    padding:1em;
+}
+
+#userInput input[type='text']{
+border:var(--verde-secundario) 3px solid;
+font-family: var(--fuente-pagina);
+padding:0.45em;
+color:white;
+background-color: var(--color-body);
+outline: none;
+border-radius: 3px;
+font-size: 1.15em;
+text-align: center;
+}
+
+#userInput input[type='text']:hover,#userInput input[type='text']:focus{
+    background-color: var(--color-body-secundario);
+}
+
 
 #username{
     color:var(--verde-primario);
@@ -604,6 +725,8 @@ option{
 
 :root{
     --color-body:#191919;
+    --color-body-50:rgba(25, 25, 25,0.5);
+    --color-body-75:rgba(25, 25, 25,0.75);
     --color-body-secundario:#0f0f0f;
     --verde-primario:#04aa6d;
     --verde-secundario:#193d3d;

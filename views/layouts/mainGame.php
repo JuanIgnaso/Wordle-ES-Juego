@@ -33,7 +33,7 @@
     }
     ?>
     <!-- CONTENEDOR DONDE SE CARGA EL CONTENIDO -->
-    <div class="container">
+    <div class="gameContainer">
         <!-- ALERTAS DE ERROR/SUCCESS... -->
         <?php
         include 'displayAlerts.php';

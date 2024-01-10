@@ -33,108 +33,101 @@ $this->title = 'Partida';
 
         </div>
         <button type="button" class="botonActions botonAdd" id="empezar">Empezar Juego</button>
-
     </section>
+
+
+
+
     <section id="mainGame">
-        <h2 class="subtituloPagina">Juego</h2>
+        <header>
+
+            <h2>La categoría es: Nombre</h3>
+                <div class="dropdown">
+                    <button type="button" class="gameConf" aria-label="Menú configuración">
+                        <i class="fa-solid fa-gears"></i>
+                    </button>
+                    <div class="confContent">
+                        <ol>
+                            <li>Menú Configuración</li>
+                            <li><a href="/menuPalabras" aria-label="Ir a menu palabras">Palabras</a></li>
+                            <li><a href="/menuCategorias" aria-label="Ir a menu categorías">Categorías</a></li>
+                        </ol>
+                    </div>
+                </div>
+        </header>
+
+        <!-- menu Configuración -->
+
         <div id="board">
-            <div class="letter success">A</div>
-            <div class="letter">A</div>
-            <div class="letter inWord">B</div>
-            <div class="letter">C</div>
-            <div class="letter">D</div>
-            <div class="letter">E</div>
-            <div class="letter">F</div>
-            <div class="letter">G</div>
-            <div class="letter">H</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
+            <div class="word"></div>
 
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
 
-            <div class="letter success">A</div>
-            <div class="letter">A</div>
-            <div class="letter inWord">B</div>
-            <div class="letter">C</div>
-            <div class="letter">D</div>
-            <div class="letter">E</div>
-            <div class="letter">F</div>
-            <div class="letter">G</div>
-            <div class="letter">H</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
+            <div class="word">
+                <div class="letter dissabled"></div>
+                <div class="letter dissabled"></div>
+                <div class="letter dissabled"></div>
+                <div class="letter dissabled"></div>
+                <div class="letter dissabled"></div>
+                <div class="letter dissabled"></div>
+                <div class="letter enabled">G</div>
+                <div class="letter enabled">H</div>
+                <div class="letter enabled">A</div>
+                <div class="letter enabled">A</div>
+                <div class="letter enabled">A</div>
+                <div class="letter enabled">A</div>
+                <div class="letter enabled">A</div>
+                <div class="letter enabled">A</div>
+            </div>
+        </div>
 
-            <div class="letter success">A</div>
-            <div class="letter">A</div>
-            <div class="letter inWord">B</div>
-            <div class="letter">C</div>
-            <div class="letter">D</div>
-            <div class="letter">E</div>
-            <div class="letter">F</div>
-            <div class="letter">G</div>
-            <div class="letter">H</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
+        <div class="separator" style="margin:Auto;"></div>
 
-            <div class="letter success">A</div>
-            <div class="letter">A</div>
-            <div class="letter inWord">B</div>
-            <div class="letter">C</div>
-            <div class="letter">D</div>
-            <div class="letter">E</div>
-            <div class="letter">F</div>
-            <div class="letter">G</div>
-            <div class="letter">H</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
+        <div>
+            <label id="userInput">
+                Escribe tu Palabra
+                <input type="text" maxlength="15" name="enter_word" id="enter_word" class="enter_word">
+            </label>
+            <script>
+                let palabras;
+                let input = document.getElementById('enter_word');
+                let board = document.getElementById('board');
+                let largo = input.getAttribute('maxlength');
 
-            <div class="letter success">A</div>
-            <div class="letter">A</div>
-            <div class="letter inWord">B</div>
-            <div class="letter">C</div>
-            <div class="letter">D</div>
-            <div class="letter">E</div>
-            <div class="letter">F</div>
-            <div class="letter">G</div>
-            <div class="letter">H</div>
-            <div class="letter">A</div>
-            <div class="letter success">W</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
-            <div class="letter">A</div>
+
+                input.addEventListener('keyup', function (event) {
+                    palabras = board.querySelectorAll('.word');
+
+                    //Crear una nueva palabra al presionar 'Enter'
+                    if (event.key == 'Enter') {
+                        //Si el largo de lo que el usuario escribe es igual al largo de la palabra
+                        if (input.value.length == largo) {
+                            //addWord();
+                            input.value = '';
+                        }
+                    } else {
+                        //Aquí habría que printar lo que escribe el usuario
+                        let letters = input.value.toUpperCase().split('');
+                        let last = palabras[palabras.length - 1];//ultima palabra
+                        last.innerHTML = '';
+                        letters.forEach(element => {
+                            let letter = document.createElement('div');
+                            letter.setAttribute('class', 'letter dissabled');
+                            letter.innerHTML = element;
+                            last.append(letter);
+                        });
+
+                    }
+                });
+
+                function addWord() {
+                    let newWord = document.createElement('div');
+                    newWord.setAttribute('class', 'word');
+                    board.append(newWord);
+                }
+            </script>
         </div>
     </section>
+
     <script>
         //Empezar juego
         let seleccionCategoria = document.querySelector('#categoriaSeleccion');
