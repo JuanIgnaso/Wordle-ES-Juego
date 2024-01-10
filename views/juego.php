@@ -5,7 +5,7 @@ use juanignaso\phpmvc\Application;
  * @var $this \juanignaso\phpmvc\View
  */
 
-$this->title = 'Partida';
+$this->title = 'Juego';
 ?>
 <h1 class="tituloPagina">Wordle - Partida <i class="fa-solid fa-gamepad"></i></h1>
 <main>
@@ -59,10 +59,9 @@ $this->title = 'Partida';
         <!-- menu Configuración -->
 
         <div id="board">
-            <div class="word"></div>
 
 
-            <div class="word">
+            <!-- <div class="word">
                 <div class="letter dissabled"></div>
                 <div class="letter dissabled"></div>
                 <div class="letter dissabled"></div>
@@ -77,7 +76,7 @@ $this->title = 'Partida';
                 <div class="letter enabled">A</div>
                 <div class="letter enabled">A</div>
                 <div class="letter enabled">A</div>
-            </div>
+            </div> -->
         </div>
 
         <div class="separator" style="margin:Auto;"></div>
@@ -85,13 +84,20 @@ $this->title = 'Partida';
         <div>
             <label id="userInput">
                 Escribe tu Palabra
-                <input type="text" maxlength="15" name="enter_word" id="enter_word" class="enter_word">
+                <input type="text" maxlength="8" name="enter_word" id="enter_word" class="enter_word">
             </label>
             <script>
+                let wordToGuess = 'jamon';
+
                 let palabras;
                 let input = document.getElementById('enter_word');
                 let board = document.getElementById('board');
                 let largo = input.getAttribute('maxlength');
+                let words = document.getElementsByClassName('word');
+                let intentos = 1;
+
+
+                addWord(largo);
 
 
                 input.addEventListener('keyup', function (event) {
@@ -100,28 +106,47 @@ $this->title = 'Partida';
                     //Crear una nueva palabra al presionar 'Enter'
                     if (event.key == 'Enter') {
                         //Si el largo de lo que el usuario escribe es igual al largo de la palabra
-                        if (input.value.length == largo) {
-                            //addWord();
+                        if (input.value.length == largo && intentos != 6) {
+                            addWord(largo);
+                            //Pintar palabra???
                             input.value = '';
+                            intentos++;
                         }
                     } else {
                         //Aquí habría que printar lo que escribe el usuario
                         let letters = input.value.toUpperCase().split('');
+
                         let last = palabras[palabras.length - 1];//ultima palabra
-                        last.innerHTML = '';
-                        letters.forEach(element => {
-                            let letter = document.createElement('div');
-                            letter.setAttribute('class', 'letter dissabled');
-                            letter.innerHTML = element;
-                            last.append(letter);
+
+                        let lastLetters = last.querySelectorAll('.letter');
+
+                        lastLetters.forEach(element => {
+                            element.innerHTML = '';
+                            element.setAttribute('class', 'letter dissabled');
                         });
+
+                        //Escribe las letras
+                        for (let i = 0; i < letters.length; i++) {
+                            lastLetters[i].innerHTML = letters[i];
+                            lastLetters[i].setAttribute('class', 'letter enabled');
+                        }
 
                     }
                 });
 
-                function addWord() {
+                /**
+                 * Añade una palabra al tablero
+                 */
+                function addWord(largo) {
+
                     let newWord = document.createElement('div');
                     newWord.setAttribute('class', 'word');
+                    newWord.style.gridTemplateColumns = "repeat(" + largo + ",5.25%)";
+                    for (let i = 0; i < largo; i++) {
+                        let letter = document.createElement('div');
+                        letter.setAttribute('class', 'letter dissabled');
+                        newWord.append(letter);
+                    }
                     board.append(newWord);
                 }
             </script>
