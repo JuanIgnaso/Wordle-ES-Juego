@@ -87,11 +87,13 @@ $this->title = 'Juego';
                 <input type="text" maxlength="8" name="enter_word" id="enter_word" class="enter_word">
             </label>
             <script>
-                let wordToGuess = 'jamon';
+                let wordToGuess = 'pesetas';
 
                 let palabras;
                 let input = document.getElementById('enter_word');
                 let board = document.getElementById('board');
+                input.setAttribute('maxlength', wordToGuess.length);
+
                 let largo = input.getAttribute('maxlength');
                 let words = document.getElementsByClassName('word');
                 let intentos = 1;
@@ -102,13 +104,16 @@ $this->title = 'Juego';
 
                 input.addEventListener('keyup', function (event) {
                     palabras = board.querySelectorAll('.word');
+                    let last = palabras[palabras.length - 1];//ultima palabra
+                    let lastLetters = last.querySelectorAll('.letter');
 
                     //Crear una nueva palabra al presionar 'Enter'
                     if (event.key == 'Enter') {
                         //Si el largo de lo que el usuario escribe es igual al largo de la palabra
                         if (input.value.length == largo && intentos != 6) {
+                            //Pintar palabra
+                            checkCurrentWord(lastLetters, wordToGuess);
                             addWord(largo);
-                            //Pintar palabra???
                             input.value = '';
                             intentos++;
                         }
@@ -116,9 +121,6 @@ $this->title = 'Juego';
                         //Aquí habría que printar lo que escribe el usuario
                         let letters = input.value.toUpperCase().split('');
 
-                        let last = palabras[palabras.length - 1];//ultima palabra
-
-                        let lastLetters = last.querySelectorAll('.letter');
 
                         lastLetters.forEach(element => {
                             element.innerHTML = '';
@@ -133,6 +135,29 @@ $this->title = 'Juego';
 
                     }
                 });
+
+                /**
+                 * Comprueba la palabra y pinta las letras, letters siendo el array con las letras
+                 * y word, la palabra a adivinar. 
+                 * 
+                 * @param letters 
+                 * @param word
+                 */
+                function checkCurrentWord(letters, word) {
+                    for (let i = 0; i < letters.length; i++) {
+
+                        // //Si la letra está en la palabra
+                        if (word.includes(letters[i].innerHTML.toLowerCase()) && word[i] != letters[i].innerHTML.toLowerCase()) {
+                            letters[i].classList.toggle('inWord');
+                        }
+
+                        //Si la letra está en la misma posición
+                        if (letters[i].innerHTML.toLowerCase() == word[i]) {
+                            letters[i].classList.toggle('success');
+                        }
+
+                    }
+                }
 
                 /**
                  * Añade una palabra al tablero
