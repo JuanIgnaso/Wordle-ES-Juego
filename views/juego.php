@@ -41,43 +41,31 @@ $this->title = 'Juego';
     <section id="mainGame">
         <header>
 
-            <h2>La categoría es: Nombre</h3>
-                <div class="dropdown">
-                    <button type="button" class="gameConf" aria-label="Menú configuración">
-                        <i class="fa-solid fa-gears"></i>
-                    </button>
-                    <div class="confContent">
-                        <ol>
-                            <li>Menú Configuración</li>
-                            <li><a href="/menuPalabras" aria-label="Ir a menu palabras">Palabras</a></li>
-                            <li><a href="/menuCategorias" aria-label="Ir a menu categorías">Categorías</a></li>
-                        </ol>
-                    </div>
+            <h2 style="text-align:center;">La categoría es: Nombre</h2>
+            <div class="dropdown">
+                <button type="button" class="gameConf" aria-label="Menú configuración">
+                    <i class="fa-solid fa-gears"></i>
+                </button>
+                <div class="confContent">
+                    <ol>
+                        <li>Menú Configuración</li>
+                        <li><a href="/menuPalabras" aria-label="Ir a menu palabras">Palabras</a></li>
+                        <li><a href="/menuCategorias" aria-label="Ir a menu categorías">Categorías</a></li>
+                    </ol>
                 </div>
+            </div>
         </header>
 
         <!-- menu Configuración -->
 
         <div id="board">
-
-
-            <!-- <div class="word">
-                <div class="letter dissabled"></div>
-                <div class="letter dissabled"></div>
-                <div class="letter dissabled"></div>
-                <div class="letter dissabled"></div>
-                <div class="letter dissabled"></div>
-                <div class="letter dissabled"></div>
-                <div class="letter enabled">G</div>
-                <div class="letter enabled">H</div>
-                <div class="letter enabled">A</div>
-                <div class="letter enabled">A</div>
-                <div class="letter enabled">A</div>
-                <div class="letter enabled">A</div>
-                <div class="letter enabled">A</div>
-                <div class="letter enabled">A</div>
-            </div> -->
-        </div>
+            <div class="word"></div>
+            <div class="word"></div>
+            <div class="word"></div>
+            <div class="word"></div>
+            <div class="word"></div>
+            <div class="word"></div>
+        </div><!-- Tablero -->
 
         <div class="separator" style="margin:Auto;"></div>
 
@@ -87,24 +75,24 @@ $this->title = 'Juego';
                 <input type="text" maxlength="8" name="enter_word" id="enter_word" class="enter_word">
             </label>
             <script>
-                let wordToGuess = 'pesetas';
+                let wordToGuess = 'lunes';
 
-                let palabras;
                 let input = document.getElementById('enter_word');
                 let board = document.getElementById('board');
+                let palabras = board.querySelectorAll('.word');
                 input.setAttribute('maxlength', wordToGuess.length);
 
                 let largo = input.getAttribute('maxlength');
                 let words = document.getElementsByClassName('word');
-                let intentos = 1;
+                let intentos = 0;
 
 
-                addWord(largo);
+                addWords(largo);//añadir todos los intentos pero mostrarlos ocultos.
+                palabras[intentos].style.visibility = 'visible'; //mostrar la primera palabra.
 
 
                 input.addEventListener('keyup', function (event) {
-                    palabras = board.querySelectorAll('.word');
-                    let last = palabras[palabras.length - 1];//ultima palabra
+                    let last = palabras[intentos];//ultima palabra
                     let lastLetters = last.querySelectorAll('.letter');
 
                     //Crear una nueva palabra al presionar 'Enter'
@@ -112,10 +100,10 @@ $this->title = 'Juego';
                         //Si el largo de lo que el usuario escribe es igual al largo de la palabra
                         if (input.value.length == largo && intentos != 6) {
                             //Pintar palabra
-                            checkCurrentWord(lastLetters, wordToGuess);
-                            addWord(largo);
+                            checkCurrentWord(lastLetters, wordToGuess) ? console.log('Acertaste!') : '';
                             input.value = '';
                             intentos++;
+                            palabras[intentos].style.visibility = 'visible';
                         }
                     } else {
                         //Aquí habría que printar lo que escribe el usuario
@@ -144,6 +132,8 @@ $this->title = 'Juego';
                  * @param word
                  */
                 function checkCurrentWord(letters, word) {
+                    let aciertos = 0;
+
                     for (let i = 0; i < letters.length; i++) {
 
                         // //Si la letra está en la palabra
@@ -154,25 +144,35 @@ $this->title = 'Juego';
                         //Si la letra está en la misma posición
                         if (letters[i].innerHTML.toLowerCase() == word[i]) {
                             letters[i].classList.toggle('success');
+                            aciertos++;
                         }
 
                     }
+                    return aciertos == largo;
                 }
 
                 /**
                  * Añade una palabra al tablero
                  */
-                function addWord(largo) {
+                function addWords(largo) {
+                    /* 
+                    Estructura de la palabra:
+                    <div class="word">
+                        <div class="letter dissabled"></div>
+                        <div class="letter dissabled"></div>
+                        ...
+                    </div>
+                    */
+                    for (let i = 0; i < palabras.length; i++) {
 
-                    let newWord = document.createElement('div');
-                    newWord.setAttribute('class', 'word');
-                    newWord.style.gridTemplateColumns = "repeat(" + largo + ",5.25%)";
-                    for (let i = 0; i < largo; i++) {
-                        let letter = document.createElement('div');
-                        letter.setAttribute('class', 'letter dissabled');
-                        newWord.append(letter);
+                        let newWord = palabras[i];
+                        newWord.style.gridTemplateColumns = "repeat(" + largo + ",5.25%)";
+                        for (let j = 0; j < largo; j++) {
+                            let letter = document.createElement('div');
+                            letter.setAttribute('class', 'letter dissabled');
+                            newWord.append(letter);
+                        }
                     }
-                    board.append(newWord);
                 }
             </script>
         </div>

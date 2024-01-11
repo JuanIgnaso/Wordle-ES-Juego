@@ -415,9 +415,10 @@ color:var(--color-error);
 #mainGame header{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom:0.5em;
     position:relative;
+    width: 100%;
 }
 
 #mainGame header h2{
@@ -431,8 +432,9 @@ confContent <- contenido del menu
 */
 
 .dropdown{
-    position:relative;
     display: inline-block;
+    position:absolute;
+    right:0;
 }
 
 .dropdown:hover .confContent{display: block;}
@@ -442,15 +444,18 @@ confContent <- contenido del menu
 .gameConf{
     font-size: 1.75em;
     border:unset;
-    color:gray;
     background-color: var(--color-body);
     cursor:pointer;
     outline: none;
-    position: relative;
+
+}
+
+.gameConf i {
+    color:gray;
 }
 
 
-.gameConf:focus,.gameConf:hover{
+.gameConf i:focus,.gameConf i:hover{
     color:white;
 }
 
@@ -491,11 +496,11 @@ confContent <- contenido del menu
 #board{
 /* border:2px solid rgba(255,255,255,0.5); */
 padding:0.75em;
-min-height: 650px;
 }
 
 .word{
     display: grid;
+    visibility: hidden;
     justify-content: center;
     align-items: start;
     grid-template-columns: repeat(15,5.25%);
