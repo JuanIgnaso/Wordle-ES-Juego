@@ -16,6 +16,7 @@ $this->title = 'Juego';
         </p>
         <p id="anotation"><strong>*</strong> Si no escoges una categoría se escogerá la que hay por
             defecto(Predeterminado).</p>
+
         <div class="custom-select" style="width:200px;">
 
             <select name="categoria" id="selectCategoria">
@@ -30,8 +31,8 @@ $this->title = 'Juego';
                 ?>
             </select>
             <script src="resources/js/customSelectScript.js"></script>
-
         </div>
+        <p id="error_categoria"></p>
         <button type="button" class="botonActions botonAdd" id="empezar">Empezar Juego</button>
     </section>
 
@@ -79,17 +80,27 @@ $this->title = 'Juego';
             </label>
             <button type="button" onclick="reStartGame()" class="botonActions botonAdd" id="replay">Jugar de
                 nuevo</button>
+
+
+
             <script>
+
+
+
+                //Empezar juego
+                let seleccionCategoria = document.querySelector('#categoriaSeleccion');
+                let pantallaJuego = document.querySelector('#mainGame');
+                let start = document.querySelector('#empezar');
+                let categoria = document.querySelector('#selectCategoria');
+                let wordToGuess = '';
                 //FRONTEND DEL JUEGO//
                 /*
                 Parte del código es temporal
                 */
-                let wordToGuess = 'lunes';
 
                 let input = document.getElementById('enter_word');
                 let board = document.getElementById('board');
                 let palabras = board.querySelectorAll('.word');
-                input.setAttribute('maxlength', wordToGuess.length);
 
                 let largo = input.getAttribute('maxlength');
                 let words = document.getElementsByClassName('word');
@@ -98,17 +109,57 @@ $this->title = 'Juego';
                 let intentos = 1;
                 let current = 0;
 
+
+
                 intentosTexto.innerHTML = intentos;
 
-                addWords(largo);//añadir todos los intentos pero mostrarlos ocultos.
-                palabras[current].style.visibility = 'visible'; //mostrar la primera palabra.
+
+                start.addEventListener('click', function () {
+                    getWord();
+                });
+
+                function getWord() {
+                    let option = categoria.value;
+                    $.ajax({
+                        url: '/getPalabra',
+                        type: 'POST',
+                        data: {
+                            categoria: option,
+                        },
+                        success: function (response) {
+                            let resp = JSON.parse(response).palabra;
+                            wordToGuess = resp;
+                            input.setAttribute('maxlength', wordToGuess.length);
+                            largo = input.getAttribute('maxlength');
+                            console.log(wordToGuess);
+                            seleccionCategoria.style.display = 'none';
+                            pantallaJuego.style.display = 'block';
+                            hola();
+                        },
+                        error: function (error) {
+                            error = JSON.parse(error.responseText);
+                            document.getElementById('error_categoria').innerHTML = error.error;
+                            return false;
+                        }
+                    })
+                }
+
+                function hola() {
+                    addWords(largo);//añadir todos los intentos pero mostrarlos ocultos.
+                    palabras[current].style.visibility = 'visible'; //mostrar la primera palabra.
+                    console.log('aaaaaaaaaaaaa');
+                }
+
+
+
+
 
 
                 input.addEventListener('keyup', function (event) {
                     let last = palabras[current];//ultima palabra
                     let lastLetters = last.querySelectorAll('.letter');
 
-                    //Crear una nueva palabra al presionar 'Enter'
+                    //Crear una nueva palabra al presionar 'Enter '
                     if (event.key == 'Enter') {
                         //En el caso de estar en el último intento.
                         if (intentos == palabras.length) {
@@ -127,7 +178,6 @@ $this->title = 'Juego';
                                 palabras[current].style.visibility = 'visible';
                             }
                         }
-
 
                     } else {
                         //Aquí habría que printar lo que escribe el usuario
@@ -217,18 +267,9 @@ $this->title = 'Juego';
                 reStartGame = () => { location.reload(); };
 
             </script>
+
         </div>
     </section>
 
-    <script>
-        //Empezar juego
-        let seleccionCategoria = document.querySelector('#categoriaSeleccion');
-        let pantallaJuego = document.querySelector('#mainGame');
-        let start = document.querySelector('#empezar');
 
-        start.addEventListener('click', function () {
-            seleccionCategoria.style.display = 'none';
-            pantallaJuego.style.display = 'block';
-        })
-    </script>
 </main>

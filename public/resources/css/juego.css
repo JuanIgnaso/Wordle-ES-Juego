@@ -131,3 +131,8 @@ confContent <- contenido del menu
         align-items: center;
         gap:2em;
     }
+
+    #error_categoria{
+        color:var(--color-error);
+        font-weight: 700;
+    }

@@ -55,6 +55,9 @@ $app->router->post('/borrarPalabra', [app\controllers\ConfigController::class, '
 
 #JUEGO
 $app->router->get('/juego', [app\controllers\GameController::class, 'juego']);
+$app->router->get('/getPalabra', [app\controllers\GameController::class, 'getPalabra']);
+$app->router->post('/getPalabra', [app\controllers\GameController::class, 'getPalabra']);
+
 
 $app->run(); #Manejar todo. <- cuando esto se ejecuta se decide que función ejecutar.
 ?>

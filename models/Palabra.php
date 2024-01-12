@@ -42,6 +42,15 @@ class Palabra extends DBmodel
         return self::query("SELECT palabras.id,palabras.palabra,palabras.categoria,categoria.nombre_categoria  FROM $tableName LEFT JOIN categoria ON palabras.categoria = categoria.id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getByCategory()
+    {
+        $tableName = $this->tableName();
+        $statement = self::prepare("SELECT palabra FROM $tableName WHERE categoria = :categoria");
+        $statement->bindValue(":categoria", $this->categoria);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
     public function labels(): array
     {
         return [
