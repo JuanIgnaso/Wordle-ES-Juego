@@ -1,0 +1,133 @@
+#categoriaSeleccion{
+    /* display:none; temporalmente mientras se hace pantalla de juego */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2em;
+    margin-bottom:2em;
+}
+
+#mainGame{
+    display: none;
+}
+
+#mainGame header{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-bottom:0.5em;
+   position:relative;
+   width: 100%;
+}
+
+#mainGame header h2{
+font-size: 1.6em;
+}
+
+.gameConf{
+    font-size: 1.75em;
+    border:unset;
+    background-color: var(--color-body);
+    cursor:pointer;
+    outline: none;
+
+}
+
+.gameConf i {
+    color:gray;
+}
+
+
+.gameConf i:focus,.gameConf i:hover{
+    color:white;
+}
+
+/*
+gameConf <- boton
+confContent <- contenido del menu
+*/
+
+.dropdown{
+    display: inline-block;
+    position:absolute;
+    right:0;
+}
+
+.dropdown:hover .confContent{display: block;}
+.dropdown:focus .confContent{display: block;}
+
+
+.confContent{
+  display: none; 
+  position: absolute;
+  padding: 0.45em;
+  border: 3px solid var(--verde-secundario);
+  border-radius: 4px;
+  right: 0;
+  top: 100%;
+  background-color: var(--color-body-75);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.confContent a{
+    color:gray;
+    outline: none;
+}
+
+.confContent a:hover,.confContent a:focus{
+    color:white;
+    font-weight: bold;
+}
+
+.confContent ol li:first-child{
+    color:var(--color-error);
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+#board{
+    /* border:2px solid rgba(255,255,255,0.5); */
+    padding:0.75em;
+    }
+    
+    .word{
+        display: grid;
+        visibility: hidden;
+        justify-content: center;
+        align-items: start;
+        grid-template-columns: repeat(15,5.25%);
+        gap:0.5em;
+        padding:0.25em;
+    }
+    
+    .letter{
+        justify-content: center;
+        aspect-ratio: 1/1;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        font-size: clamp(0.1rem, 4vw, 2rem);
+        font-weight: 700;
+    }
+    
+    .enabled{
+        border:3px solid white;
+        box-shadow: 0px 0px 3px 3px rgba(255,255,255,0.5);
+    }
+    
+    .dissabled{
+        border:3px solid rgba(128, 128, 128,0.25);
+    }
+    
+    #replay{
+        display: none;
+        margin:1em 0em;
+    }
+
+    #gameActions{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:2em;
+    }

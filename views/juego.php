@@ -41,7 +41,7 @@ $this->title = 'Juego';
     <section id="mainGame">
         <header>
 
-            <h2 style="text-align:center;">La categoría es: Nombre</h2>
+            <h2 style="text-align:center;" id="gameMessage">La categoría es: Nombre</h2>
             <div class="dropdown">
                 <button type="button" class="gameConf" aria-label="Menú configuración">
                     <i class="fa-solid fa-gears"></i>
@@ -55,26 +55,35 @@ $this->title = 'Juego';
                 </div>
             </div>
         </header>
+        <h4 style="text-align:center;">Intentos: <strong id="numIntentos"></strong></h4>
 
         <!-- menu Configuración -->
 
+        <!-- Tablero -->
         <div id="board">
-            <div class="word"></div>
-            <div class="word"></div>
-            <div class="word"></div>
-            <div class="word"></div>
-            <div class="word"></div>
-            <div class="word"></div>
-        </div><!-- Tablero -->
+            <!-- PALABRAS -->
+            <div class="word" aria-label="Palabra"></div>
+            <div class="word" aria-label="Palabra"></div>
+            <div class="word" aria-label="Palabra"></div>
+            <div class="word" aria-label="Palabra"></div>
+            <div class="word" aria-label="Palabra"></div>
+            <div class="word" aria-label="Palabra"></div>
+        </div>
 
         <div class="separator" style="margin:Auto;"></div>
 
-        <div>
+        <div id="gameActions">
             <label id="userInput">
                 Escribe tu Palabra
                 <input type="text" maxlength="8" name="enter_word" id="enter_word" class="enter_word">
             </label>
+            <button type="button" onclick="reStartGame()" class="botonActions botonAdd" id="replay">Jugar de
+                nuevo</button>
             <script>
+                //FRONTEND DEL JUEGO//
+                /*
+                Parte del código es temporal
+                */
                 let wordToGuess = 'lunes';
 
                 let input = document.getElementById('enter_word');
@@ -84,45 +93,80 @@ $this->title = 'Juego';
 
                 let largo = input.getAttribute('maxlength');
                 let words = document.getElementsByClassName('word');
-                let intentos = 0;
+                let intentosTexto = document.querySelector('#numIntentos');
+                let message = document.querySelector('#gameMessage');
+                let intentos = 1;
+                let current = 0;
 
+                intentosTexto.innerHTML = intentos;
 
                 addWords(largo);//añadir todos los intentos pero mostrarlos ocultos.
-                palabras[intentos].style.visibility = 'visible'; //mostrar la primera palabra.
+                palabras[current].style.visibility = 'visible'; //mostrar la primera palabra.
 
 
                 input.addEventListener('keyup', function (event) {
-                    let last = palabras[intentos];//ultima palabra
+                    let last = palabras[current];//ultima palabra
                     let lastLetters = last.querySelectorAll('.letter');
 
                     //Crear una nueva palabra al presionar 'Enter'
                     if (event.key == 'Enter') {
-                        //Si el largo de lo que el usuario escribe es igual al largo de la palabra
-                        if (input.value.length == largo && intentos != 6) {
-                            //Pintar palabra
-                            checkCurrentWord(lastLetters, wordToGuess) ? console.log('Acertaste!') : '';
-                            input.value = '';
-                            intentos++;
-                            palabras[intentos].style.visibility = 'visible';
+                        //En el caso de estar en el último intento.
+                        if (intentos == palabras.length) {
+                            checkCurrentWord(lastLetters, wordToGuess) ? displayResult('Ganaste!') : displayResult('Perdiste!');
                         }
+                        //Si el largo de lo que el usuario escribe es igual al largo de la palabra
+                        if (input.value.length == largo && intentos < 6) {
+                            //Pintar palabra
+                            if (checkCurrentWord(lastLetters, wordToGuess)) {
+                                displayResult('Ganaste!');
+                            } else {
+                                input.value = '';
+                                intentos++;
+                                current++;
+                                intentosTexto.innerHTML = intentos;
+                                palabras[current].style.visibility = 'visible';
+                            }
+                        }
+
+
                     } else {
                         //Aquí habría que printar lo que escribe el usuario
+                        input.value = input.value.replace(/[^a-zA-Z]/i, '');
                         let letters = input.value.toUpperCase().split('');
 
-
-                        lastLetters.forEach(element => {
-                            element.innerHTML = '';
-                            element.setAttribute('class', 'letter dissabled');
-                        });
-
-                        //Escribe las letras
-                        for (let i = 0; i < letters.length; i++) {
-                            lastLetters[i].innerHTML = letters[i];
-                            lastLetters[i].setAttribute('class', 'letter enabled');
-                        }
-
+                        updateCurrWord(lastLetters)
+                        writeLetters(letters, lastLetters);
                     }
                 });
+
+
+                /*
+                Muestra el resultado en la cabecera del board y muestra el botón para
+                jugar otra vez.
+                */
+                function displayResult(message) {
+                    document.querySelector('#gameMessage').innerHTML = message;
+                    document.querySelector('#replay').style.display = 'block';
+                    document.querySelector('#userInput').style.display = 'none';
+                    input.setAttribute('disabled', 'true');
+                }
+
+                /*PARA QUE SE ACTUALICE LA VISTA CUANDO EL USUARIO ESCRIBA O BORRE UN CARACTER*/
+                function updateCurrWord(word) {
+                    word.forEach(element => {
+                        element.innerHTML = '';
+                        element.setAttribute('class', 'letter dissabled');
+                    });
+                }
+
+                //Escribe las letras en la posición actual
+                function writeLetters(letters, word) {
+                    //Escribe las letras
+                    for (let i = 0; i < letters.length; i++) {
+                        word[i].innerHTML = letters[i];
+                        word[i].setAttribute('class', 'letter enabled');
+                    }
+                }
 
                 /**
                  * Comprueba la palabra y pinta las letras, letters siendo el array con las letras
@@ -130,13 +174,14 @@ $this->title = 'Juego';
                  * 
                  * @param letters 
                  * @param word
+                 * @returns bool
                  */
                 function checkCurrentWord(letters, word) {
+
                     let aciertos = 0;
 
                     for (let i = 0; i < letters.length; i++) {
-
-                        // //Si la letra está en la palabra
+                        //Si la letra está en la palabra
                         if (word.includes(letters[i].innerHTML.toLowerCase()) && word[i] != letters[i].innerHTML.toLowerCase()) {
                             letters[i].classList.toggle('inWord');
                         }
@@ -146,23 +191,17 @@ $this->title = 'Juego';
                             letters[i].classList.toggle('success');
                             aciertos++;
                         }
-
                     }
+
                     return aciertos == largo;
                 }
 
+
+
                 /**
-                 * Añade una palabra al tablero
+                 * Añade las palabras al tablero 'board' con un largo en función de la palabra a adivinar.
                  */
                 function addWords(largo) {
-                    /* 
-                    Estructura de la palabra:
-                    <div class="word">
-                        <div class="letter dissabled"></div>
-                        <div class="letter dissabled"></div>
-                        ...
-                    </div>
-                    */
                     for (let i = 0; i < palabras.length; i++) {
 
                         let newWord = palabras[i];
@@ -174,6 +213,9 @@ $this->title = 'Juego';
                         }
                     }
                 }
+
+                reStartGame = () => { location.reload(); };
+
             </script>
         </div>
     </section>
