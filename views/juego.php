@@ -58,7 +58,7 @@ $this->title = 'Juego';
                 </div>
             </div>
         </header>
-        <h4 style="text-align:center;">Intentos: <strong id="numIntentos"></strong></h4>
+        <h4 style="text-align:center;">Intentos: <strong id="numIntentos"></strong> de <strong>6</strong></h4>
 
         <!-- menu Configuración -->
 
@@ -84,38 +84,21 @@ $this->title = 'Juego';
                 nuevo</button>
 
 
-
             <script>
-
-
-
-                //Empezar juego
-                let seleccionCategoria = document.querySelector('#categoriaSeleccion');
-                let categoria = document.querySelector('#selectCategoria');
-                let wordToGuess = '';
-                //FRONTEND DEL JUEGO//
-                /*
-                Parte del código es temporal
-                */
-
-                let input = document.getElementById('enter_word');
-                let board = document.getElementById('board');
-                let palabras = board.querySelectorAll('.word');
-
-                let largo = input.getAttribute('maxlength');
-                let words = document.getElementsByClassName('word');
-                let message = document.querySelector('#gameMessage'); //Mensaje de la cabecera de la partida
+                /*SCRIPT QUE MANEJA EL FUNCIONAMIENTO DEL JUEGO***********************************************/
+                /*VARIABLES----------------------------------------------------------------------------------*/
+                let wordToGuess = ''; //Palabra que debe adivinar el usuario(por defecto vacía)
+                let input = document.getElementById('enter_word');//input donde el usuario escribe la palabra.
+                let palabras = document.querySelectorAll('#board .word'); //Array de palabras.
                 let intentos = 1; //Intentos de la partida
-                let current = 0;
+                let current = 0;  //Posición del array que contiene las palabras
+                /*-------------------------------------------------------------------------------------------*/
 
-
-
+                //Botón para empezar la partida
                 document.querySelector('#empezar').addEventListener('click', function () {
-                    getWord();
-                });
+                    let option = document.querySelector('#selectCategoria').value;//Valor seleccionado del select
 
-                function getWord() {
-                    let option = categoria.value;
+                    /*Llamada por AJAX para escoger una palabra en función de la categoría seleccionda*/
                     $.ajax({
                         url: '/getPalabra',
                         type: 'POST',
@@ -129,41 +112,39 @@ $this->title = 'Juego';
                         error: function (error) {
                             error = JSON.parse(error.responseText);
                             document.getElementById('error_categoria').innerHTML = error.error;
-                            return false;
                         }
                     })
-                }
+                });
 
+
+                /**
+                 * Empieza la partida para el usuario una vez seleccionada una categoría que dispone de palabras.
+                 */
                 function startGame(resp) {
-                    wordToGuess = resp.palabra;
+                    wordToGuess = resp.palabra; //resp.palabra es la palabra que el usuario tiene que adivinar
                     document.querySelector('#gameMessage strong').innerHTML = resp.categoria;
                     input.setAttribute('maxlength', wordToGuess.length);
-                    largo = input.getAttribute('maxlength');
-                    console.log(wordToGuess);
                     document.querySelector('#numIntentos').innerHTML = intentos;
-                    seleccionCategoria.style.display = 'none';
-                    document.querySelector('#mainGame').style.display = 'block'; //Pantalla del juego
-                    addWords(largo);//añadir todos los intentos pero mostrarlos ocultos.
-                    palabras[current].style.visibility = 'visible'; //mostrar la primera palabra para que el usuario sepa el largo de la misma.
+                    document.querySelector('#categoriaSeleccion').style.display = 'none'; //Ocultar el menú de selección de categoría.
+                    document.querySelector('#mainGame').style.display = 'block'; //Mostrar la pantalla del juego
+                    addWords(wordToGuess.length);
+                    palabras[current].style.visibility = 'visible'; //mostrar el largo de la palabra.
                 }
 
 
-
-
-
-
+                /*Función asociada al input donde el usuario escribe cada intento*/
                 input.addEventListener('keyup', function (event) {
-                    let last = palabras[current];//ultima palabra
-                    let lastLetters = last.querySelectorAll('.letter');
+
+                    let lastLetters = palabras[current].querySelectorAll('.letter'); //Letras de la última palabra o intento
 
                     //Crear una nueva palabra al presionar 'Enter '
                     if (event.key == 'Enter') {
-                        //En el caso de estar en el último intento.
+                        //Último intento.
                         if (intentos == palabras.length) {
                             checkCurrentWord(lastLetters, wordToGuess) ? displayResult('Ganaste!') : displayResult(`Perdiste! la palabra era <strong>${wordToGuess}</strong>`);
                         }
                         //Si el largo de lo que el usuario escribe es igual al largo de la palabra
-                        if (input.value.length == largo && intentos < 6) {
+                        if (input.value.length == wordToGuess.length && intentos < 6) {
                             //Pintar palabra
                             if (checkCurrentWord(lastLetters, wordToGuess)) {
                                 displayResult('Ganaste!');
@@ -175,7 +156,6 @@ $this->title = 'Juego';
                                 palabras[current].style.visibility = 'visible';
                             }
                         }
-
                     } else {
                         //Aquí habría que printar lo que escribe el usuario
                         input.value = input.value.replace(/[^a-zA-Z]/i, '');
@@ -189,7 +169,7 @@ $this->title = 'Juego';
 
                 /*
                 Muestra el resultado en la cabecera del board y muestra el botón para
-                jugar otra vez.
+                jugar otra vez si el usuario gana o agota todos los intentos.
                 */
                 function displayResult(message) {
                     document.querySelector('#gameMessage').innerHTML = message;
@@ -240,13 +220,12 @@ $this->title = 'Juego';
                         }
                     }
 
-                    return aciertos == largo;
+                    return aciertos == wordToGuess.length;
                 }
 
 
-
                 /**
-                 * Añade las palabras al tablero 'board' con un largo en función de la palabra a adivinar.
+                 * Añade las letras a cada una de las palabras, la cantidad varía en función del valor de la variable 'largo'
                  */
                 function addWords(largo) {
                     for (let i = 0; i < palabras.length; i++) {
@@ -262,9 +241,7 @@ $this->title = 'Juego';
                 }
 
                 reStartGame = () => { location.reload(); };
-
             </script>
-
         </div>
     </section>
 
