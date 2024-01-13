@@ -24,15 +24,20 @@ class GameController extends Controller
     public function getPalabra(Request $request)
     {
         $model = new Palabra();
+        $modelCategoria = new Categoria();
 
         if ($request->isPost()) {
             $model->loadData($request->getBody());
-            $array = $model->getByCategory();
+            $array = $model->getByCategory(); //Cogemos todas las palabras de la categoría
+            $categoria = $modelCategoria->getCategoryName($model->categoria); //Nombre de la categoría
             #implica que si hay palabras
             if (count($array) != 0) {
                 $palabra = $array[rand(0, count($array) - 1)];
                 Application::$app->response->setStatusCode(200);
-                echo json_encode(['palabra' => $array[rand(0, count($array) - 1)]]);
+                echo json_encode([
+                    'palabra' => $array[rand(0, count($array) - 1)],
+                    'categoria' => $categoria
+                ]);
                 exit;
             } else {
                 Application::$app->response->setStatusCode(400);

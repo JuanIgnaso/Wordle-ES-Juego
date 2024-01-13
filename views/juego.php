@@ -13,6 +13,8 @@ $this->title = 'Juego';
         <h2 class="subtituloPagina">Selecciona una categoría <i class="fa-solid fa-layer-group"></i></h2>
         <p>Selecciona aquí una categoría de palabras para poder empezar a jugar! <strong>*</strong></p>
         <p>Una vez escogida una categoría, el juego decidirá que palabra debes de adivinar y podrás empezar la partida.
+        <p>Recomendable jugar al juego en <strong>Landscape <i class="fa-regular fa-images"></i></strong> si se juega en
+            pantalla movil</p>
         </p>
         <p id="anotation"><strong>*</strong> Si no escoges una categoría se escogerá la que hay por
             defecto(Predeterminado).</p>
@@ -42,7 +44,7 @@ $this->title = 'Juego';
     <section id="mainGame">
         <header>
 
-            <h2 style="text-align:center;" id="gameMessage">La categoría es: Nombre</h2>
+            <h2 style="text-align:center;" id="gameMessage">La categoría es: <strong></strong></h2>
             <div class="dropdown">
                 <button type="button" class="gameConf" aria-label="Menú configuración">
                     <i class="fa-solid fa-gears"></i>
@@ -89,8 +91,6 @@ $this->title = 'Juego';
 
                 //Empezar juego
                 let seleccionCategoria = document.querySelector('#categoriaSeleccion');
-                let pantallaJuego = document.querySelector('#mainGame');
-                let start = document.querySelector('#empezar');
                 let categoria = document.querySelector('#selectCategoria');
                 let wordToGuess = '';
                 //FRONTEND DEL JUEGO//
@@ -104,17 +104,13 @@ $this->title = 'Juego';
 
                 let largo = input.getAttribute('maxlength');
                 let words = document.getElementsByClassName('word');
-                let intentosTexto = document.querySelector('#numIntentos');
-                let message = document.querySelector('#gameMessage');
-                let intentos = 1;
+                let message = document.querySelector('#gameMessage'); //Mensaje de la cabecera de la partida
+                let intentos = 1; //Intentos de la partida
                 let current = 0;
 
 
 
-                intentosTexto.innerHTML = intentos;
-
-
-                start.addEventListener('click', function () {
+                document.querySelector('#empezar').addEventListener('click', function () {
                     getWord();
                 });
 
@@ -127,14 +123,8 @@ $this->title = 'Juego';
                             categoria: option,
                         },
                         success: function (response) {
-                            let resp = JSON.parse(response).palabra;
-                            wordToGuess = resp;
-                            input.setAttribute('maxlength', wordToGuess.length);
-                            largo = input.getAttribute('maxlength');
-                            console.log(wordToGuess);
-                            seleccionCategoria.style.display = 'none';
-                            pantallaJuego.style.display = 'block';
-                            hola();
+                            let resp = JSON.parse(response);
+                            startGame(resp);
                         },
                         error: function (error) {
                             error = JSON.parse(error.responseText);
@@ -144,10 +134,17 @@ $this->title = 'Juego';
                     })
                 }
 
-                function hola() {
+                function startGame(resp) {
+                    wordToGuess = resp.palabra;
+                    document.querySelector('#gameMessage strong').innerHTML = resp.categoria;
+                    input.setAttribute('maxlength', wordToGuess.length);
+                    largo = input.getAttribute('maxlength');
+                    console.log(wordToGuess);
+                    document.querySelector('#numIntentos').innerHTML = intentos;
+                    seleccionCategoria.style.display = 'none';
+                    document.querySelector('#mainGame').style.display = 'block'; //Pantalla del juego
                     addWords(largo);//añadir todos los intentos pero mostrarlos ocultos.
-                    palabras[current].style.visibility = 'visible'; //mostrar la primera palabra.
-                    console.log('aaaaaaaaaaaaa');
+                    palabras[current].style.visibility = 'visible'; //mostrar la primera palabra para que el usuario sepa el largo de la misma.
                 }
 
 
@@ -163,7 +160,7 @@ $this->title = 'Juego';
                     if (event.key == 'Enter') {
                         //En el caso de estar en el último intento.
                         if (intentos == palabras.length) {
-                            checkCurrentWord(lastLetters, wordToGuess) ? displayResult('Ganaste!') : displayResult('Perdiste!');
+                            checkCurrentWord(lastLetters, wordToGuess) ? displayResult('Ganaste!') : displayResult(`Perdiste! la palabra era <strong>${wordToGuess}</strong>`);
                         }
                         //Si el largo de lo que el usuario escribe es igual al largo de la palabra
                         if (input.value.length == largo && intentos < 6) {
@@ -174,7 +171,7 @@ $this->title = 'Juego';
                                 input.value = '';
                                 intentos++;
                                 current++;
-                                intentosTexto.innerHTML = intentos;
+                                document.querySelector('#numIntentos').innerHTML = intentos;
                                 palabras[current].style.visibility = 'visible';
                             }
                         }
