@@ -72,9 +72,17 @@ class ConfigController extends Controller
         if ($request->isPost()) {
             $model->loadData($request->getBody());
             $nombre = $model->getCategoryName($model->id);
-            if ($model->nombre_categoria == 'Predeterminado') {
+
+            $palabraModel->loadData(['categoria' => $model->id]);
+
+            if (count($palabraModel->getByCategory()) != 0) {
                 Application::$app->response->setStatusCode(400);
-                Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no se Puede borrar.");
+                Application::$app->session->setFlash('error', "La categoría $nombre no se puede borrar debido a que contiene palabras en ella.");
+            }
+
+            if ($model->id == 1) {
+                Application::$app->response->setStatusCode(400);
+                Application::$app->session->setFlash('error', "La Categoría $nombre no se Puede borrar.");
                 exit;
             }
 
