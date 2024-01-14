@@ -2,13 +2,12 @@
 
 namespace app\models;
 
-use juanignaso\phpmvc\CategoriaModel;
 use juanignaso\phpmvc\db\DBmodel;
 use juanignaso\phpmvc\Model;
 
-class Categoria extends DBmodel
+class CategoriaModel extends DBmodel
 {
-    public string $id;
+    public string $id = '';
     public string $nombre_categoria = '';
 
     public function save()
@@ -19,8 +18,11 @@ class Categoria extends DBmodel
 
     public function delete(): bool
     {
-        $this->nombre_categoria = ucfirst(strtolower($this->nombre_categoria));
-        return parent::delete();
+        $tableName = $this->tableName();
+        $statement = self::prepare("DELETE FROM $tableName WHERE id = :id");
+        $statement->bindValue(":id", $this->id);
+        $statement->execute();
+        return $statement->rowCount() != 0;
     }
 
     public function getAll()

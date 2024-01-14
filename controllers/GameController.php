@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Categoria;
-use app\models\Palabra;
+use app\models\CategoriaModel;
+use app\models\PalabraModel;
 use juanignaso\phpmvc\Application;
 use juanignaso\phpmvc\Controller;
 use juanignaso\phpmvc\Request;
@@ -12,7 +12,7 @@ class GameController extends Controller
 {
     public function juego(Request $request)
     {
-        $categorias = new Categoria();
+        $categorias = new CategoriaModel();
 
         $this->setLayout('mainGame');
 
@@ -23,8 +23,8 @@ class GameController extends Controller
 
     public function getPalabra(Request $request)
     {
-        $model = new Palabra();
-        $modelCategoria = new Categoria();
+        $model = new PalabraModel();
+        $modelCategoria = new CategoriaModel();
 
         if ($request->isPost()) {
             $model->loadData($request->getBody());

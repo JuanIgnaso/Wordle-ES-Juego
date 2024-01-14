@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Categoria;
-use app\models\Palabra;
+use app\models\CategoriaModel;
+use app\models\PalabraModel;
 use juanignaso\phpmvc\Application;
 use juanignaso\phpmvc\Controller;
 use juanignaso\phpmvc\middlewares\AuthMiddleware;
@@ -19,8 +19,8 @@ class ConfigController extends Controller
     public function menuPalabras(Request $request)
     {
 
-        $model = new Palabra();
-        $categorias = new Categoria();
+        $model = new PalabraModel();
+        $categorias = new CategoriaModel();
 
         $palabras = $model->getAll();
         $categoriasList = $categorias->getAll();
@@ -44,7 +44,7 @@ class ConfigController extends Controller
 
     public function menuCategorias(Request $request)
     {
-        $model = new Categoria();
+        $model = new CategoriaModel();
         $categoryList = $model->getAll();
 
         if ($request->isPost()) {
@@ -66,10 +66,12 @@ class ConfigController extends Controller
 
     public function borrarCategoria(Request $request)
     {
-        $model = new Categoria();
+        $model = new CategoriaModel();
+        $palabraModel = new PalabraModel();
 
         if ($request->isPost()) {
             $model->loadData($request->getBody());
+            $nombre = $model->getCategoryName($model->id);
             if ($model->nombre_categoria == 'Predeterminado') {
                 Application::$app->response->setStatusCode(400);
                 Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no se Puede borrar.");
@@ -78,12 +80,12 @@ class ConfigController extends Controller
 
             if ($model->delete()) {
                 Application::$app->response->setStatusCode(200);
-                Application::$app->session->setFlash('success', "Categoría $model->nombre_categoria ha sido eliminada");
+                Application::$app->session->setFlash('success', "Categoría $nombre ha sido eliminada");
                 exit;
 
             } else {
                 http_response_code(400);
-                Application::$app->session->setFlash('error', "La Categoría $model->nombre_categoria no existe.");
+                Application::$app->session->setFlash('error', "La Categoría $nombre no existe.");
                 exit;
             }
         }
@@ -93,7 +95,7 @@ class ConfigController extends Controller
 
     public function borrarPalabra(Request $request)
     {
-        $model = new Palabra();
+        $model = new PalabraModel();
         if ($request->isPost()) {
             $model->loadData($request->getBody());
             if ($model->delete()) {

@@ -5,7 +5,7 @@ namespace app\models;
 use juanignaso\phpmvc\db\DBmodel;
 use juanignaso\phpmvc\Model;
 
-class Palabra extends DBmodel
+class PalabraModel extends DBmodel
 {
     public string $id = '';
     public string $palabra = '';

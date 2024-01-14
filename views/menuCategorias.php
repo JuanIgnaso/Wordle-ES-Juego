@@ -32,34 +32,37 @@ $this->title = 'Menú Categorías';
         <caption>Categorías actuales <strong>
                 <?php echo count($categorias); ?>
             </strong></caption>
-        <tr>
-            <thead>
+        <thead>
+            <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre Categoría</th>
                 <th scope="col">Acción</th>
-            </thead>
-        </tr>
-        <?php
-        foreach ($categorias as $categoria) {
-            if ($categoria['id'] != 1) {
-                ?>
-                <tr>
-                    <td>
-                        <?php echo $categoria['id']; ?>
-                    </td>
-                    <td>
-                        <?php echo $categoria['nombre_categoria']; ?>
-                    </td>
-                    <td class="action"><i class="fa-regular fa-square-minus actionBorrar"
-                            onclick="borrarElemento( '<?php echo $categoria['nombre_categoria']; ?>','/borrarCategoria')"
-                            aria-label="Borrar"></i></td>
-                </tr>
-                <?php
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($categorias as $categoria) {
+                if ($categoria['id'] != 1) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $categoria['id']; ?>
+                        </td>
+                        <td>
+                            <?php echo $categoria['nombre_categoria']; ?>
+                        </td>
+                        <td class="action"><i class="fa-regular fa-square-minus actionBorrar"
+                                onclick="borrarElemento( '<?php echo $categoria['id']; ?>','/borrarCategoria')"
+                                aria-label="Borrar"></i></td>
+                    </tr>
+                    <?php
+                }
             }
-        }
-        ?>
+            ?>
+        </tbody>
     </table>
-
+    <script src="resources/js/dist/fancyTable.min.js"></script>
+    <script src="resources/js/shortDataTable.js"></script>
     <script>
         /*
         Función para borrar la categoría especificada por el input text
@@ -70,7 +73,7 @@ $this->title = 'Menú Categorías';
                 url: url,
                 type: 'POST',
                 data: {
-                    nombre_categoria: data
+                    id: data
                 },
                 success: function (response) {
                     location.reload();
