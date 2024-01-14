@@ -22,7 +22,7 @@ class LoginForm extends Model
             return false;
         }
         //Si la contraseña no es correcta
-        if (password_verify($this->password, $usuario->password)) {
+        if (!password_verify($this->password, $usuario->password)) {
             $this->addError('password', 'Contraseña incorrecta, prueba de nuevo.');
             return false;
         }

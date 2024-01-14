@@ -482,10 +482,6 @@ caption{
     text-align: center;
 }
 
-/* .dataTable{
-    margin-bottom:2em;
-} */
-
 .pagButton{
     background-color: var(--color-body);
     padding:0.5em;
@@ -511,27 +507,6 @@ th{
 th,td{
     padding:0.5em;
 }
-
-/* select{
-    border:3px solid var(--verde-secundario);
-    border-radius: 3px;
-    padding: 0.5em;
-    font-family: var(--fuente-pagina);
-    background-color:var(--color-body);
-    color:white;
-}
-
-option{
-    font-family: var(--fuente-pagina);
-}
-
-
-
-#select_categoria:hover,#select_categoria:focus{
-    border: 3px solid var(--verde-primario);
-    background-color: var(--color-body-secundario);
-    outline: none;
-} */
 
 /*--------------CSS SELECT CUSTOM----------------*/
  /* The container must be positioned relative: */

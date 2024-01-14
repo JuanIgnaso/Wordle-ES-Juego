@@ -11,6 +11,10 @@ use juanignaso\phpmvc\Response;
 
 class AuthController extends Controller
 {
+    /**
+     * Registra un nuevo usuario en la BBDD
+     * @param Request $request
+     */
     public function register(Request $request)
     {
         $model = new Usuario();
@@ -31,6 +35,13 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Loguea un usuario dentro de la app dependiendo si ha o no introducido bien los credenciales.
+     * 
+     * @param Request $request
+     * @param Response $response
+     * 
+     */
     public function login(Request $request, Response $response)
     {
         $model = new LoginForm();
@@ -47,6 +58,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Deslogea al usuario que tiene sesión actualmente
+     * @param Request $request
+     * @param Response $response
+     */
     public function logout(Request $request, Response $response)
     {
         Application::$app->logout();

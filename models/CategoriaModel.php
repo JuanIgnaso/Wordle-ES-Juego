@@ -59,6 +59,11 @@ class CategoriaModel extends DBmodel
         return 'id';
     }
 
+    /**
+     * Devuelve el nombre de la categoría asociada la id pasada como parámetro.
+     * 
+     * @return string
+     */
     public function getCategoryName($id): string
     {
         $statement = self::prepare("SELECT nombre_categoria FROM categoria WHERE id = :id");

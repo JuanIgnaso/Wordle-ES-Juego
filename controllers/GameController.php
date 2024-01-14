@@ -10,6 +10,10 @@ use juanignaso\phpmvc\Request;
 
 class GameController extends Controller
 {
+    /**
+     * Carga la vista donde se realiza el juego.
+     * @param Request $request
+     */
     public function juego(Request $request)
     {
         $categorias = new CategoriaModel();
@@ -21,6 +25,12 @@ class GameController extends Controller
         ]);
     }
 
+    /**
+     * Envia una palabra a la vista para empezar el juego si dicha categoría recibida
+     * por POST contiene palabras, o un error en caso de estar vacía
+     * 
+     * @param Request $request
+     */
     public function getPalabra(Request $request)
     {
         $model = new PalabraModel();
@@ -30,6 +40,7 @@ class GameController extends Controller
             $model->loadData($request->getBody());
             $array = $model->getByCategory(); //Cogemos todas las palabras de la categoría
             $categoria = $modelCategoria->getCategoryName($model->categoria); //Nombre de la categoría
+
             #implica que si hay palabras
             if (count($array) != 0) {
                 $palabra = $array[rand(0, count($array) - 1)];

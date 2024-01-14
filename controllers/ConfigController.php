@@ -16,6 +16,12 @@ class ConfigController extends Controller
     {
         $this->registerMiddleware(new AuthMiddleware(['menuPalabras', 'menuCategorias']));
     }
+    /**
+     * Muestra el menú de las palabras creadas en la BBDD y añade una nueva en caso de
+     * ser llamada por 'POST'
+     * 
+     * @param Request $request
+     */
     public function menuPalabras(Request $request)
     {
 
@@ -42,6 +48,12 @@ class ConfigController extends Controller
         ]);
     }
 
+    /**
+     * Muestra el menú de las categorías creadas en la BBDD y añade una nueva en caso de
+     * ser llamada por 'POST'
+     * 
+     * @param Request $request
+     */
     public function menuCategorias(Request $request)
     {
         $model = new CategoriaModel();
@@ -64,6 +76,11 @@ class ConfigController extends Controller
         ]);
     }
 
+    /**
+     * Borra la categoría recibida desde la vista por JQUERY y despliega un mensaje en función
+     * del resultado.
+     * @param Request $request
+     */
     public function borrarCategoria(Request $request)
     {
         $model = new CategoriaModel();
@@ -79,18 +96,15 @@ class ConfigController extends Controller
                 Application::$app->response->setStatusCode(400);
                 Application::$app->session->setFlash('error', "La categoría $nombre no se puede borrar debido a que contiene palabras en ella.");
             }
-
             if ($model->id == 1) {
                 Application::$app->response->setStatusCode(400);
                 Application::$app->session->setFlash('error', "La Categoría $nombre no se Puede borrar.");
                 exit;
             }
-
             if ($model->delete()) {
                 Application::$app->response->setStatusCode(200);
                 Application::$app->session->setFlash('success', "Categoría $nombre ha sido eliminada");
                 exit;
-
             } else {
                 http_response_code(400);
                 Application::$app->session->setFlash('error', "La Categoría $nombre no existe.");
@@ -101,6 +115,17 @@ class ConfigController extends Controller
 
     }
 
+
+
+    /**
+     * Borra la Palabra de la BBDD en base al nombre recibido por QJUERY y muestra
+     * una alerta en función del resultado de la operación.
+     * <ol>
+     * <li>success - si se ha borrado</li>
+     * <li>error - si algo mal ha ocurrido</li>
+     * </ol>
+     * @param Request $request
+     */
     public function borrarPalabra(Request $request)
     {
         $model = new PalabraModel();
@@ -121,6 +146,5 @@ class ConfigController extends Controller
         Application::$app->response->redirect('/menuCategorias');
 
     }
-
 
 }

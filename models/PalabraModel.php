@@ -36,13 +36,21 @@ class PalabraModel extends DBmodel
         return 'palabras';
     }
 
+    /**
+     * Devuelve todos los registros de la tabla palabras junto con el nombre de la categoría.
+     */
     public function getAll()
     {
         $tableName = $this->tableName();
         return self::query("SELECT palabras.id,palabras.palabra,palabras.categoria,categoria.nombre_categoria  FROM $tableName LEFT JOIN categoria ON palabras.categoria = categoria.id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getByCategory()
+    /**
+     * Devuelve una lista con las palabras asociadas a la categoría pasada como parámetro
+     * 
+     * @return array
+     */
+    public function getByCategory(): array
     {
         $tableName = $this->tableName();
         $statement = self::prepare("SELECT palabra FROM $tableName WHERE categoria = :categoria");
