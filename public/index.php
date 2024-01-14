@@ -23,7 +23,7 @@ $config = [
         'dsn' => $_ENV['DB_DSN'], //<- variables de entorno se llaman así.
         'user' => $_ENV['DB_USER'],
         'password' => $_ENV['DB_PASSWORD'],
-    ]
+    ],
 ];
 
 $app = new Application(dirname(__DIR__), $config); //<- dirname(__DIR__) es el directorio base de la aplicación
