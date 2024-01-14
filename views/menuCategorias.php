@@ -29,11 +29,15 @@ $this->title = 'Menú Categorías';
     <div class="separator"></div>
 
     <table class=" dataTable">
-        <caption>Categorías actuales</caption>
+        <caption>Categorías actuales <strong>
+                <?php echo count($categorias); ?>
+            </strong></caption>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre Categoría</th>
-            <th scope="col">Acción</th>
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre Categoría</th>
+                <th scope="col">Acción</th>
+            </thead>
         </tr>
         <?php
         foreach ($categorias as $categoria) {

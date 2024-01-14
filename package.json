@@ -1,0 +1,14 @@
+{
+  "name": "wordle-es-juego",
+  "version": "1.0.0",
+  "description": "Juego de Wordle en español",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@myspace-nu/jquery.fancytable": "^1.0.9"
+  }
+}

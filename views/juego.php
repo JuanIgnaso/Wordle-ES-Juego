@@ -131,6 +131,22 @@ $this->title = 'Juego';
                     palabras[current].style.visibility = 'visible'; //mostrar el largo de la palabra.
                 }
 
+                /**
+                 * Añade las letras a cada una de las palabras, la cantidad varía en función del valor de la variable 'largo'
+                 */
+                function addWords(largo) {
+                    for (let i = 0; i < palabras.length; i++) {
+
+                        let newWord = palabras[i];
+                        newWord.style.gridTemplateColumns = "repeat(" + largo + ",5.25%)";
+                        for (let j = 0; j < largo; j++) {
+                            let letter = document.createElement('div');
+                            letter.setAttribute('class', 'letter dissabled');
+                            newWord.append(letter);
+                        }
+                    }
+                }
+
 
                 /*Función asociada al input donde el usuario escribe cada intento*/
                 input.addEventListener('keyup', function (event) {
@@ -149,6 +165,7 @@ $this->title = 'Juego';
                             if (checkCurrentWord(lastLetters, wordToGuess)) {
                                 displayResult('Ganaste!');
                             } else {
+                                //Si no acierta vacía el contenido del input y incrementa el número de intentos y posición actual
                                 input.value = '';
                                 intentos++;
                                 current++;
@@ -157,7 +174,7 @@ $this->title = 'Juego';
                             }
                         }
                     } else {
-                        //Aquí habría que printar lo que escribe el usuario
+                        //Si no le da a 'Enter' escribe en la palabra actual las letras del input
                         input.value = input.value.replace(/[^a-zA-Z]/i, '');
                         let letters = input.value.toUpperCase().split('');
 
@@ -223,24 +240,7 @@ $this->title = 'Juego';
                     return aciertos == wordToGuess.length;
                 }
 
-
-                /**
-                 * Añade las letras a cada una de las palabras, la cantidad varía en función del valor de la variable 'largo'
-                 */
-                function addWords(largo) {
-                    for (let i = 0; i < palabras.length; i++) {
-
-                        let newWord = palabras[i];
-                        newWord.style.gridTemplateColumns = "repeat(" + largo + ",5.25%)";
-                        for (let j = 0; j < largo; j++) {
-                            let letter = document.createElement('div');
-                            letter.setAttribute('class', 'letter dissabled');
-                            newWord.append(letter);
-                        }
-                    }
-                }
-
-                reStartGame = () => { location.reload(); };
+                reStartGame = () => { location.reload(); };//Recarga la página para reiniciar el juego.
             </script>
         </div>
     </section>

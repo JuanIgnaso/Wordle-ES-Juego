@@ -486,6 +486,19 @@ caption{
     margin-bottom:2em;
 } */
 
+.pagButton{
+    background-color: var(--color-body);
+    padding:0.5em;
+    color:gray;
+    border-radius: 3px;
+}
+
+.pagButtonActive{
+    background-color: var(--color-body-secundario);
+    color:white;
+    font-weight: 700;
+}
+
 tr:nth-child(odd) {background-color: var(--verde-secundario-50)}
 
 th{

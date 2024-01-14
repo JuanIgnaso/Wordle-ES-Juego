@@ -40,46 +40,75 @@ $this->title = 'Menú Palabras';
         <!-- script custom select -->
         <script src="resources/js/customSelectScript.js"></script>
 
-
-
         <?php echo $form->field($model, 'palabra'); ?>
         <button type="submit" class="botonActions botonAdd">Añadir Palabra</button>
     </div>
-
     <?php Form::end(); ?>
+
+
     <section class="registrosContainer">
         <div class="separator"></div>
         <table class="dataTable">
-            <caption>Palabras Actuales</caption>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Palabra</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Acción</th>
-            </tr>
-            <?php
-            foreach ($palabras as $palabra) {
-                ?>
+            <caption>Palabras Actuales
+                <strong>
+                    <?php echo count($palabras); ?>
+                </strong>
+            </caption>
+            <thead>
                 <tr>
-                    <td>
-                        <?php echo $palabra['id']; ?>
-                    </td>
-                    <td>
-                        <?php echo $palabra['palabra']; ?>
-                    </td>
-                    <td>
-                        <?php echo $palabra['nombre_categoria']; ?>
-                    </td>
-                    <td class="action">
-                        <i class="fa-regular fa-square-minus actionBorrar"
-                            onclick="borrarElemento( '<?php echo $palabra['palabra']; ?>','<?php echo $palabra['categoria']; ?>','/borrarPalabra')"
-                            aria-label="Borrar"></i>
-                    </td>
+                    <th>ID</th>
+                    <th>Palabra</th>
+                    <th>Categoria</th>
+                    <th>Acción</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php
-            }
-            ?>
+                foreach ($palabras as $palabra) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $palabra['id']; ?>
+                        </td>
+                        <td>
+                            <?php echo $palabra['palabra']; ?>
+                        </td>
+                        <td>
+                            <?php echo $palabra['nombre_categoria']; ?>
+                        </td>
+                        <td class="action">
+                            <i class="fa-regular fa-square-minus actionBorrar"
+                                onclick="borrarElemento( '<?php echo $palabra['palabra']; ?>','<?php echo $palabra['categoria']; ?>','/borrarPalabra')"
+                                aria-label="Borrar"></i>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
         </table>
+        <script src="resources/js/dist/fancyTable.min.js"></script>
+        <script>
+            $('.dataTable').fancyTable({
+                sortColumn: 0, // column number for initial sorting
+                sortOrder: 'descending', // 'desc', 'descending', 'asc', 'ascending', -1 (descending) and 1 (ascending)
+                sortable: true,
+                pagination: true, // default: false
+                perPage: 10, //Elementos por página
+                searchable: true, //si queremos que sea buscable
+                globalSearch: true, //búsqueda global
+                globalSearchExcludeColumns: [1, 4],// excluir columnas
+
+                //Customizar la paginación
+                paginationClass: "pagButton",
+                paginationClassActive: 'pagButtonActive',
+
+                //Customizar el search
+                inputStyle: "background-color:var(--color-body);color:white;font-family: var(--fuente-pagina);outline:none;padding:0.45em;",
+                inputPlaceholder: 'Buscar...',
+
+            });
+        </script>
         <script>
             /*
             Función para borrar la categoría especificada por el input text
