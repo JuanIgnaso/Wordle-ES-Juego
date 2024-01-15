@@ -24,7 +24,9 @@ El siguiente paso es crear una Base de Datos a la cual querramos hacer conexión
 ### Poner en marcha la base de datos
 Para poder usar la aplicación, antes de entrar por la dirección URL o a la dirección creada por el comando `php -S` desde la **carpeta raíz** y una vez tengas puesto los datos de la Base de datos, escribe por consola el siguiente comando:
 
-`php Migrations.php`
+```dif
+php Migrations.php
+```
 
 El cual debería insertar las tablas necesarias en tu Base de datos creada, mostrando el siguiente mensaje por consola.
 
@@ -47,7 +49,14 @@ Accediendo a la url `/register` y rellenando los campos correctos nos creará un
 
 ![register completado](https://github.com/JuanIgnaso/Wordle-ES-Juego/assets/104755375/cc7c63a3-c715-48ab-8bcf-16cc392d1fee)
 
+Si se ha creado con exito la cuenta te podrás loguear en `/login`
  
  ### Crear y Borrar Palabras y Categorías para el juego
+
+ **Disponiendo de cuenta de usuario** en `/menuPalabras` y `/menuCategorias` podrás añadir palabras y categorías que quieras para que el juego disponga de más palabras a la hora de jugar.
  
  ### El juego
+**Selecciona una categoría** y a jugar!, escribe en el input text para intentar rellenar y adivinar la palabra escogida por la aplicación, las letras se colorearán de <strong>verde</strong> si la letra está en esa misma posición, o <strong>amarillo</strong> si la palabra contiene esa letra!
+
+
+Una vez terminada la partida puedes volver a intentarlo en `Jugar de nuevo`.
