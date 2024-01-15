@@ -6,11 +6,17 @@ use app\models\LoginForm;
 use app\models\Usuario;
 use juanignaso\phpmvc\Application;
 use juanignaso\phpmvc\Controller;
+use juanignaso\phpmvc\middlewares\LoggedMiddleware;
 use juanignaso\phpmvc\Request;
 use juanignaso\phpmvc\Response;
 
 class AuthController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->loggedMiddleware(new LoggedMiddleware(['login', 'register']));
+    }
     /**
      * Registra un nuevo usuario en la BBDD
      * @param Request $request
