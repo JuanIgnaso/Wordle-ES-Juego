@@ -13,59 +13,22 @@ Esta aplicación está en fase de prueba, pero la puedes probar en un equipo que
  ## Como Poner en Marcha y Probar la aplicación
 
 ### Requerimientos
-<ul>
- <li>PHP Instalado</li>
- <li>Servidor de Base de datos con el que hacer conexión</li>
- <li>Manejador de paquetes Composer</li>
- <li>*Opcional* Servidor Apache</li>
-</ul>
 
-Si se cumple con lo de arriba, una vez tengas clonado el repositorio ejecuta en la **_carpeta raíz del proyecto_**:
+Disponer de Docker o Docker Desktop instalado en el equipo.
+
+### Como poner en marcha
+
+Clona el repositorio en tu carpeta de preferencia y dentro de la carpeta raíz del proyecto ejecuta el siguiente comando:
 
 ```
-composer install
+docker compose up -d
 ```
+Si la app te da error de que no tiene composer instalado, ejecuta el siguiente comando a continuación dentro de la carpeta raíz:
+
 ```
-composer update
-```
-
-Para probar la aplicación se debe de ejecutar desde su directorio `./public` , bien con el comando `php -S direccion_host:puerto` dentro del directorio, o haciendo referencia a ella desde el archivo host en caso de utilizar **Apache**
-
-El siguiente paso es crear una Base de Datos a la cual querramos hacer conexión, datos pertinentes a la configuración se encuentran en el archivo de variables de entorno `.env`
-
- ![imagen de ejemplo del archivo .env](https://github.com/JuanIgnaso/Wordle-ES-Juego/assets/104755375/0293799b-f16b-4bbb-b8ec-31236aab3ea2)
-
-<ol>
- <li><strong>DSN</strong> escribe ahí el host, el puerto y la base de datos</li>
- <li><strong>DB_USER</strong> el usuario de la base de datos</li>
- <li><strong>DB_PASSWORD</strong> la contraseña que disponga tu base de datos</li>
-</ol>
-
-### Poner en marcha la base de datos
-
-**_Existen dos opciones para poner en marcha la BBDD_**
-<ol>
- <li>Migrations.php</li>
- <li>Importando el sql</li>
-</ol>
-
-**Migrations.php:** antes de entrar por la dirección URL o a la dirección creada por el comando `php -S` desde la **carpeta raíz** y una vez tengas puesto los datos de la Base de datos, escribe por consola el siguiente comando:
-
-```dif
-php Migrations.php
+docker compose exec app composer install
 ```
 
-El cual debería insertar las tablas necesarias en tu Base de datos creada, mostrando el siguiente mensaje por consola.
-
-![imagen ejemplo ejecución de comando php Migrations.php](https://github.com/JuanIgnaso/Wordle-ES-Juego/assets/104755375/8ec8b014-9f70-40dc-b4a7-1ed53d7b27e8)
-
-
-![Base de datos creada](https://github.com/JuanIgnaso/Wordle-ES-Juego/assets/104755375/78649e14-c2f8-447d-8974-7c2bfc63191f)
-
- **Importando el sql**
- También puedes importar el sql de la Base de datos entera haciendo uso del **_sql proporcionado en el directorio_** `/database_sql`
-
- ![imagen de script sql](https://github.com/JuanIgnaso/Wordle-ES-Juego/assets/104755375/097755aa-0b33-4c7f-be39-c8b2ad7bcaba)
 
  
  ## Uso del Juego
