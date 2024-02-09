@@ -70,16 +70,16 @@
         },
         {
             "name": "juanignaso/php-mcv-core",
-            "version": "v1.0.2",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JuanIgnaso/php-mcv-core-template.git",
-                "reference": "895f3eb4fec3aa238fdefc45d3e51191d8335105"
+                "reference": "c5ae4fbea3cc12445b99c4b988288809aea5a69c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JuanIgnaso/php-mcv-core-template/zipball/895f3eb4fec3aa238fdefc45d3e51191d8335105",
-                "reference": "895f3eb4fec3aa238fdefc45d3e51191d8335105",
+                "url": "https://api.github.com/repos/JuanIgnaso/php-mcv-core-template/zipball/c5ae4fbea3cc12445b99c4b988288809aea5a69c",
+                "reference": "c5ae4fbea3cc12445b99c4b988288809aea5a69c",
                 "shasum": ""
             },
             "type": "library",
@@ -97,9 +97,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JuanIgnaso/php-mcv-core-template/issues",
-                "source": "https://github.com/JuanIgnaso/php-mcv-core-template/tree/v1.0.2"
+                "source": "https://github.com/JuanIgnaso/php-mcv-core-template/tree/v1.0.5"
             },
-            "time": "2024-01-16T15:55:02+00:00"
+            "time": "2024-02-09T15:49:42+00:00"
         },
         {
             "name": "phpoption/phpoption",
