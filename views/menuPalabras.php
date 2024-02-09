@@ -18,13 +18,13 @@ $this->title = 'Menú Palabras';
     <?php $form = Form::begin('', 'post'); ?>
     <div class="actions">
         <div class="custom-select" style="width:200px;">
-            <select name="categoria" id="selectCategoria">
+            <select name="categoria" id="categoria">
                 <option value="">Selecciona Una</option>
                 <?php
                 foreach ($categorias as $categoria) {
                     ?>
-                    <option value="<?php echo $categoria['id']; ?>" <?php echo isset($model->categoria) && $model->categoria == $categoria['id'] ? 'selected' : ''; ?>>
-                        <?php echo $categoria['nombre_categoria']; ?>
+                    <option value="<?php echo $categoria['value']; ?>" <?php echo isset($model->categoria) && $model->categoria == $categoria['value'] ? 'selected' : ''; ?>>
+                        <?php echo $categoria['name']; ?>
                     </option>
                     <?php
                 }

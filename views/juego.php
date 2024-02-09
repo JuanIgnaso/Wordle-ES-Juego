@@ -21,7 +21,7 @@ $this->title = 'Juego';
 
         <div class="custom-select" style="width:200px;">
 
-            <select name="categoria" id="selectCategoria">
+            <select name="categoria" id="categoria">
                 <?php
                 foreach ($categorias as $categoria) {
                     ?>
@@ -96,7 +96,7 @@ $this->title = 'Juego';
 
                 //Botón para empezar la partida
                 document.querySelector('#empezar').addEventListener('click', function () {
-                    let option = document.querySelector('#selectCategoria').value;//Valor seleccionado del select
+                    let option = document.querySelector('#categoria').value;//Valor seleccionado del select
 
                     /*Llamada por AJAX para escoger una palabra en función de la categoría seleccionda*/
                     $.ajax({

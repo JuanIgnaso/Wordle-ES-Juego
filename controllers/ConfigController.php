@@ -26,15 +26,22 @@ class ConfigController extends Controller
     {
 
         $model = new PalabraModel();
-        $categorias = new CategoriaModel();
-
+        $categoriasModel = new CategoriaModel();
         $palabras = $model->getAll();
-        $categoriasList = $categorias->getAll();
+        $categoriasList = $categoriasModel->getAll();
+
+        $categorias = [];
+        foreach ($categoriasList as $c) {
+            $categorias[] = array(
+                'value' => $c['id'],
+                'name' => $c['nombre_categoria'],
+            );
+        }
 
         if ($request->isPost()) {
             $model->loadData($request->getBody());
             if ($model->validate() && $model->save()) {
-                Application::$app->session->setFlash('success', "Palabra $model->palabra añadida en la Categoría " . $categorias->getCategoryName($model->categoria));
+                Application::$app->session->setFlash('success', "Palabra $model->palabra añadida en la Categoría " . $categoriasModel->getCategoryName($model->categoria));
                 Application::$app->response->redirect('/menuPalabras');
             }
         }
@@ -42,7 +49,7 @@ class ConfigController extends Controller
         #Enviamos el modelo y la lista de categorías/palabras a la vista
         return $this->render('menuPalabras', [
             'model' => $model,
-            'categorias' => $categoriasList,
+            'categorias' => $categorias,
             'palabras' => $palabras,
             'errors' => $model->errors,
         ]);
